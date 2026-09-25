@@ -77,7 +77,7 @@ public final class GameHost {
         publish()
     }
 
-    public func publish() {
+    private func publish() {
         try? link.send(MessageCodec.encodeState(state))
         onState(state)
     }
