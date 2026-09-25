@@ -1,0 +1,539 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		420000000000000000000001 /* KnuckledApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410000000000000000000001 /* KnuckledApp.swift */; };
+		420000000000000000000002 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410000000000000000000002 /* Theme.swift */; };
+		420000000000000000000003 /* StartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410000000000000000000003 /* StartScreen.swift */; };
+		420000000000000000000004 /* GameSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410000000000000000000004 /* GameSession.swift */; };
+		420000000000000000000005 /* GameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410000000000000000000005 /* GameScreen.swift */; };
+		420000000000000000000006 /* BoardViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410000000000000000000006 /* BoardViews.swift */; };
+		420000000000000000000007 /* DieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410000000000000000000007 /* DieView.swift */; };
+		420000000000000000000008 /* ResultOverlays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410000000000000000000008 /* ResultOverlays.swift */; };
+		420000000000000000000009 /* CinzelBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 410000000000000000000009 /* CinzelBold.ttf */; };
+		420000000000000000000010 /* GameSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410000000000000000000010 /* GameSessionTests.swift */; };
+		420000000000000000000011 /* ColumnDisplayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410000000000000000000011 /* ColumnDisplayTests.swift */; };
+		420000000000000000000012 /* SoloSmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410000000000000000000012 /* SoloSmokeTests.swift */; };
+		420000000000000000000013 /* KnuckledCore in Frameworks */ = {isa = PBXBuildFile; productRef = 450000000000000000000002 /* KnuckledCore */; };
+		420000000000000000000014 /* KnuckledCore in Frameworks */ = {isa = PBXBuildFile; productRef = 450000000000000000000002 /* KnuckledCore */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		410000000000000000000001 /* KnuckledApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnuckledApp.swift; sourceTree = "<group>"; };
+		410000000000000000000002 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		410000000000000000000003 /* StartScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreen.swift; sourceTree = "<group>"; };
+		410000000000000000000004 /* GameSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSession.swift; sourceTree = "<group>"; };
+		410000000000000000000005 /* GameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScreen.swift; sourceTree = "<group>"; };
+		410000000000000000000006 /* BoardViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViews.swift; sourceTree = "<group>"; };
+		410000000000000000000007 /* DieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DieView.swift; sourceTree = "<group>"; };
+		410000000000000000000008 /* ResultOverlays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultOverlays.swift; sourceTree = "<group>"; };
+		410000000000000000000009 /* CinzelBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CinzelBold.ttf; sourceTree = "<group>"; };
+		410000000000000000000010 /* GameSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSessionTests.swift; sourceTree = "<group>"; };
+		410000000000000000000011 /* ColumnDisplayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnDisplayTests.swift; sourceTree = "<group>"; };
+		410000000000000000000012 /* SoloSmokeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoloSmokeTests.swift; sourceTree = "<group>"; };
+		410000000000000000000013 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		410000000000000000000014 /* Knuckled.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Knuckled.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		410000000000000000000015 /* KnuckledTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KnuckledTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		410000000000000000000016 /* KnuckledUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KnuckledUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		430000000000000000000003 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				420000000000000000000013 /* KnuckledCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		430000000000000000000006 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				420000000000000000000014 /* KnuckledCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		430000000000000000000009 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		400000000000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				400000000000000000000002 /* Knuckled */,
+				400000000000000000000003 /* KnuckledTests */,
+				400000000000000000000004 /* KnuckledUITests */,
+				400000000000000000000005 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		400000000000000000000002 /* Knuckled */ = {
+			isa = PBXGroup;
+			children = (
+				410000000000000000000001 /* KnuckledApp.swift */,
+				410000000000000000000002 /* Theme.swift */,
+				410000000000000000000003 /* StartScreen.swift */,
+				410000000000000000000004 /* GameSession.swift */,
+				410000000000000000000005 /* GameScreen.swift */,
+				410000000000000000000006 /* BoardViews.swift */,
+				410000000000000000000007 /* DieView.swift */,
+				410000000000000000000008 /* ResultOverlays.swift */,
+				410000000000000000000013 /* Info.plist */,
+				400000000000000000000006 /* Resources */,
+			);
+			path = Knuckled;
+			sourceTree = "<group>";
+		};
+		400000000000000000000003 /* KnuckledTests */ = {
+			isa = PBXGroup;
+			children = (
+				410000000000000000000010 /* GameSessionTests.swift */,
+				410000000000000000000011 /* ColumnDisplayTests.swift */,
+			);
+			path = KnuckledTests;
+			sourceTree = "<group>";
+		};
+		400000000000000000000004 /* KnuckledUITests */ = {
+			isa = PBXGroup;
+			children = (
+				410000000000000000000012 /* SoloSmokeTests.swift */,
+			);
+			path = KnuckledUITests;
+			sourceTree = "<group>";
+		};
+		400000000000000000000005 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				410000000000000000000014 /* Knuckled.app */,
+				410000000000000000000015 /* KnuckledTests.xctest */,
+				410000000000000000000016 /* KnuckledUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		400000000000000000000006 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				410000000000000000000009 /* CinzelBold.ttf */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		200000000000000000000001 /* Knuckled */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 300000000000000000000002 /* Build configuration list for PBXNativeTarget "Knuckled" */;
+			buildPhases = (
+				430000000000000000000001 /* Sources */,
+				430000000000000000000002 /* Resources */,
+				430000000000000000000003 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Knuckled;
+			packageProductDependencies = (
+				450000000000000000000002 /* KnuckledCore */,
+			);
+			productName = Knuckled;
+			productReference = 410000000000000000000014 /* Knuckled.app */;
+			productType = "com.apple.product-type.application";
+		};
+		200000000000000000000002 /* KnuckledTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 300000000000000000000003 /* Build configuration list for PBXNativeTarget "KnuckledTests" */;
+			buildPhases = (
+				430000000000000000000004 /* Sources */,
+				430000000000000000000006 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				440000000000000000000001 /* PBXTargetDependency */,
+			);
+			name = KnuckledTests;
+			packageProductDependencies = (
+				450000000000000000000002 /* KnuckledCore */,
+			);
+			productName = KnuckledTests;
+			productReference = 410000000000000000000015 /* KnuckledTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		200000000000000000000003 /* KnuckledUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 300000000000000000000004 /* Build configuration list for PBXNativeTarget "KnuckledUITests" */;
+			buildPhases = (
+				430000000000000000000007 /* Sources */,
+				430000000000000000000009 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				440000000000000000000002 /* PBXTargetDependency */,
+			);
+			name = KnuckledUITests;
+			productName = KnuckledUITests;
+			productReference = 410000000000000000000016 /* KnuckledUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		100000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1700;
+				TargetAttributes = {
+					200000000000000000000001 /* Knuckled */ = {
+						CreatedOnToolsVersion = 17.0;
+					};
+					200000000000000000000002 /* KnuckledTests */ = {
+						CreatedOnToolsVersion = 17.0;
+						TestTargetID = 200000000000000000000001 /* Knuckled */;
+					};
+					200000000000000000000003 /* KnuckledUITests */ = {
+						CreatedOnToolsVersion = 17.0;
+						TestTargetID = 200000000000000000000001 /* Knuckled */;
+					};
+				};
+			};
+			buildConfigurationList = 300000000000000000000001 /* Build configuration list for PBXProject "Knuckled" */;
+			compatibilityVersion = "Xcode 16.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 400000000000000000000001;
+			packageReferences = (
+				450000000000000000000001 /* XCRemoteSwiftPackageReference "KnuckledCore" */,
+			);
+			productRefGroup = 400000000000000000000005 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				200000000000000000000001 /* Knuckled */,
+				200000000000000000000002 /* KnuckledTests */,
+				200000000000000000000003 /* KnuckledUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		430000000000000000000002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				420000000000000000000009 /* CinzelBold.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		430000000000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				420000000000000000000001 /* KnuckledApp.swift in Sources */,
+				420000000000000000000002 /* Theme.swift in Sources */,
+				420000000000000000000003 /* StartScreen.swift in Sources */,
+				420000000000000000000004 /* GameSession.swift in Sources */,
+				420000000000000000000005 /* GameScreen.swift in Sources */,
+				420000000000000000000006 /* BoardViews.swift in Sources */,
+				420000000000000000000007 /* DieView.swift in Sources */,
+				420000000000000000000008 /* ResultOverlays.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		430000000000000000000004 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				420000000000000000000010 /* GameSessionTests.swift in Sources */,
+				420000000000000000000011 /* ColumnDisplayTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		430000000000000000000007 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				420000000000000000000012 /* SoloSmokeTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		440000000000000000000001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 200000000000000000000001 /* Knuckled */;
+			targetProxy = 440000000000000000000003 /* PBXContainerItemProxy */;
+		};
+		440000000000000000000002 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 200000000000000000000001 /* Knuckled */;
+			targetProxy = 440000000000000000000004 /* PBXContainerItemProxy */;
+		};
+		440000000000000000000003 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 100000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 200000000000000000000001;
+			remoteInfo = Knuckled;
+		};
+		440000000000000000000004 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 100000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteInfo = Knuckled;
+			remoteGlobalIDString = 200000000000000000000001;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		310000000000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJCM_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		310000000000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJCM_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		310000000000000000000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Knuckled/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.knucklegame;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		310000000000000000000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Knuckled/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.knucklegame;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		310000000000000000000005 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.knucklegame.KnuckledTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Knuckled.app/Knuckled";
+			};
+			name = Debug;
+		};
+		310000000000000000000006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.knucklegame.KnuckledTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Knuckled.app/Knuckled";
+			};
+			name = Release;
+		};
+		310000000000000000000007 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.knucklegame.KnuckledUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Knuckled;
+			};
+			name = Debug;
+		};
+		310000000000000000000008 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.knucklegame.KnuckledUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Knuckled;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		300000000000000000000001 /* Build configuration list for PBXProject "Knuckled" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				310000000000000000000001 /* Debug */,
+				310000000000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		300000000000000000000002 /* Build configuration list for PBXNativeTarget "Knuckled" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				310000000000000000000003 /* Debug */,
+				310000000000000000000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		300000000000000000000003 /* Build configuration list for PBXNativeTarget "KnuckledTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				310000000000000000000005 /* Debug */,
+				310000000000000000000006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		300000000000000000000004 /* Build configuration list for PBXNativeTarget "KnuckledUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				310000000000000000000007 /* Debug */,
+				310000000000000000000008 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		450000000000000000000001 /* XCRemoteSwiftPackageReference "KnuckledCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = .;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		450000000000000000000002 /* KnuckledCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 450000000000000000000001 /* XCRemoteSwiftPackageReference "KnuckledCore" */;
+			productName = KnuckledCore;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+	};
+	rootObject = 100000000000000000000001 /* Project object */;
+}
