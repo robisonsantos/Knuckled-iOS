@@ -10,8 +10,17 @@ public final class GameHost {
     private let firstPlayer: () -> PlayerId
     private let onState: (GameState) -> Void
 
+    private let lock = NSLock()
+    private var _state: GameState
     private var first: PlayerId?
-    public private(set) var state: GameState
+
+    /// Current state. Serialized with an internal lock: safe to read from test/UI
+    /// threads while link callbacks mutate it. `rollValue`/`firstPlayer` closures
+    /// must be non-reentrant (must not call back into this host).
+    public var state: GameState {
+        lock.lock(); defer { lock.unlock() }
+        return _state
+    }
 
     public init(link: GameLink,
                 hostName: String,
@@ -25,7 +34,7 @@ public final class GameHost {
         self.rollDelayMs = rollDelayMs
         self.firstPlayer = firstPlayer
         self.onState = onState
-        self.state = KnucklebonesRules.reset(hostName: hostName, clientName: "?", firstPlayer: .HOST)
+        self._state = KnucklebonesRules.reset(hostName: hostName, clientName: "?", firstPlayer: .HOST)
     }
 
     public func connect() {
@@ -34,9 +43,12 @@ public final class GameHost {
 
     private func onLine(_ line: String) {
         if let name = MessageCodec.decodeName(line) {
+            lock.lock()
             first = firstPlayer()
-            state = KnucklebonesRules.reset(hostName: hostName, clientName: MessageCodec.sanitizeName(name), firstPlayer: first!)
-            publish()
+            _state = KnucklebonesRules.reset(hostName: hostName, clientName: MessageCodec.sanitizeName(name), firstPlayer: first!)
+            let snapshot = _state
+            lock.unlock()
+            publish(snapshot)
         } else if MessageCodec.isRoll(line) {
             rollFor(.CLIENT)
         } else if let column = MessageCodec.decodePlace(line) {
@@ -55,30 +67,43 @@ public final class GameHost {
     }
 
     private func rollFor(_ player: PlayerId) {
-        guard KnucklebonesRules.canRoll(state, player) else { return }
-        state = KnucklebonesRules.beginRoll(state, player)
-        publish()
+        lock.lock()
+        guard KnucklebonesRules.canRoll(_state, player) else { lock.unlock(); return }
+        _state = KnucklebonesRules.beginRoll(_state, player)
+        let rolling = _state
+        lock.unlock()
+        publish(rolling)
         Thread.sleep(forTimeInterval: Double(rollDelayMs) / 1000.0)
-        state = KnucklebonesRules.completeRoll(state, player, rollValue())
-        publish()
+        lock.lock()
+        guard _state.phase == .ROLLING && _state.currentTurn == player else { lock.unlock(); return }
+        _state = KnucklebonesRules.completeRoll(_state, player, rollValue())
+        let done = _state
+        lock.unlock()
+        publish(done)
     }
 
     private func placeFor(_ player: PlayerId, _ column: Int) {
-        guard KnucklebonesRules.canPlace(state, player, column) else { return }
-        state = KnucklebonesRules.place(state, player, column)
-        publish()
+        lock.lock()
+        guard KnucklebonesRules.canPlace(_state, player, column) else { lock.unlock(); return }
+        _state = KnucklebonesRules.place(_state, player, column)
+        let snapshot = _state
+        lock.unlock()
+        publish(snapshot)
     }
 
     public func restart() {
-        guard KnucklebonesRules.canRestart(state) else { return }
+        lock.lock()
+        guard KnucklebonesRules.canRestart(_state) else { lock.unlock(); return }
         let firstPlayerNow = first ?? firstPlayer()
         first = firstPlayerNow
-        state = KnucklebonesRules.reset(hostName: state.hostName, clientName: state.clientName, firstPlayer: firstPlayerNow)
-        publish()
+        _state = KnucklebonesRules.reset(hostName: _state.hostName, clientName: _state.clientName, firstPlayer: firstPlayerNow)
+        let snapshot = _state
+        lock.unlock()
+        publish(snapshot)
     }
 
-    private func publish() {
-        try? link.send(MessageCodec.encodeState(state))
-        onState(state)
+    private func publish(_ snapshot: GameState) {
+        try? link.send(MessageCodec.encodeState(snapshot))
+        onState(snapshot)
     }
 }
