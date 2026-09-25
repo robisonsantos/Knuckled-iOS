@@ -44,17 +44,22 @@ public func runFakeClient(_ link: GameLink) {
     try? link.send(MessageCodec.encodeName(FakeGamePeer.name))
 }
 
+/// Weak box letting runFakeHost's onState closure reference a host that
+/// does not exist yet at closure-creation time (capture lists evaluate eagerly).
+final class WeakHost { weak var value: GameHost?; init(_ v: GameHost? = nil) { value = v } }
+
 /// Bot playing the host side via a GameHost (used when the app connects as client in fake mode).
+/// Caller must retain the returned host for the session duration.
 public func runFakeHost(_ link: GameLink) -> GameHost {
     let counter = Counter()
-    var host: GameHost!
-    host = GameHost(
+    let box = WeakHost()
+    let host = GameHost(
         link: link,
         hostName: FakeGamePeer.hostName,
         rollValue: { counter.increment(); return (counter.value % 6) + 1 },
         rollDelayMs: 50,
-        onState: { [weak host] state in
-            guard let host else { return }
+        onState: { [box] state in
+            guard let host = box.value else { return }
             if KnucklebonesRules.canRoll(state, .HOST) {
                 delayed(0.05) { host.hostRoll() }
             }
@@ -66,6 +71,7 @@ public func runFakeHost(_ link: GameLink) -> GameHost {
             }
         }
     )
+    box.value = host
     host.connect()
     return host
 }
