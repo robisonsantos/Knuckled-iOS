@@ -99,6 +99,20 @@ public struct GameState: Codable, Equatable, Sendable {
         player == .HOST ? .CLIENT : .HOST
     }
 
+    public func copy(status: Status? = nil, winner: PlayerId? = nil, lastRoll: Int? = nil) -> GameState {
+        GameState(
+            hostName: hostName,
+            clientName: clientName,
+            status: status ?? self.status,
+            currentTurn: currentTurn,
+            phase: phase,
+            grid: grid,
+            winner: (status != nil && status != .IN_PROGRESS) ? winner : self.winner,
+            lastRoll: lastRoll ?? self.lastRoll,
+            destroyed: destroyed
+        )
+    }
+
     private enum CodingKeys: String, CodingKey, CaseIterable {
         case hostName, clientName, status, currentTurn, phase, grid, winner, lastRoll, destroyed
     }
