@@ -8,6 +8,7 @@ public final class GameHost {
     private let rollValue: () -> Int
     private let rollDelayMs: Int
     private let firstPlayer: () -> PlayerId
+    /// Invoked on the caller's thread (reader thread for peer lines); UI observers must dispatch to main.
     private let onState: (GameState) -> Void
 
     private let lock = NSLock()
@@ -22,6 +23,7 @@ public final class GameHost {
         return _state
     }
 
+    /// - Parameters rollValue, firstPlayer: invoked with the internal lock held; must not re-enter this host.
     public init(link: GameLink,
                 hostName: String,
                 rollValue: @escaping () -> Int = { Int.random(in: 1...6) },
@@ -75,6 +77,7 @@ public final class GameHost {
         publish(rolling)
         Thread.sleep(forTimeInterval: Double(rollDelayMs) / 1000.0)
         lock.lock()
+        // Aborted roll: a reset/restart already published newer state; do not publish.
         guard _state.phase == .ROLLING && _state.currentTurn == player else { lock.unlock(); return }
         _state = KnucklebonesRules.completeRoll(_state, player, rollValue())
         let done = _state
