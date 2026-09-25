@@ -41,10 +41,14 @@ final class FakeGameLink: GameLink {
     var onLine: ((String) -> Void)?
     var onClosed: (() -> Void)?
     private let lock = NSLock()
-    var sent: [String] = []
+    private var _sent: [String] = []
+    var sent: [String] {
+        lock.lock(); defer { lock.unlock() }
+        return _sent
+    }
 
     func send(_ line: String) throws {
-        lock.lock(); sent.append(line); lock.unlock()
+        lock.lock(); _sent.append(line); lock.unlock()
     }
 
     func close() {
@@ -57,6 +61,6 @@ final class FakeGameLink: GameLink {
 
     var lastState: GameState? {
         lock.lock(); defer { lock.unlock() }
-        return sent.last.flatMap { MessageCodec.decodeState($0) }
+        return _sent.last.flatMap { MessageCodec.decodeState($0) }
     }
 }

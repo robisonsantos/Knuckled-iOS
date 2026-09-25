@@ -9,10 +9,11 @@ public final class GameLinkCore: GameLink {
         didSet {
             lock.lock()
             onLineAttached = true
+            let handler = onLine
             let toDeliver = pending
             pending = []
             lock.unlock()
-            toDeliver.forEach { onLine?($0) }
+            toDeliver.forEach { handler?($0) }
         }
     }
 
@@ -23,7 +24,6 @@ public final class GameLinkCore: GameLink {
     private let lock = NSLock()
     private var pending: [String] = []
     private var onLineAttached = false
-    private var running = true
     private var closed = false
 
     public init(input: ByteSource, output: ByteSink) {
@@ -49,9 +49,9 @@ public final class GameLinkCore: GameLink {
             return
         }
         closed = true
+        let handler = onClosed
         lock.unlock()
-        onClosed?()
-        running = false
+        handler?()
         input.close()
         output.close()
     }
@@ -59,7 +59,7 @@ public final class GameLinkCore: GameLink {
     private func startReading() {
         Thread.detachNewThread { [weak self] in
             guard let self else { return }
-            while self.running {
+            while true {
                 guard let line = Protocol.readLine(from: self.input) else { break }
                 self.dispatch(line)
             }
