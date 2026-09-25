@@ -29,13 +29,6 @@ final class ClosedFlag {
     var value: Bool { lock.lock(); defer { lock.unlock() }; return flag }
 }
 
-final class Counter {
-    private let lock = NSLock()
-    private var n = 0
-    func increment() { lock.lock(); n += 1; lock.unlock() }
-    var value: Int { lock.lock(); defer { lock.unlock() }; return n }
-}
-
 /// In-memory GameLink recording sent lines; call receive(_:) to simulate the peer.
 final class FakeGameLink: GameLink {
     var onLine: ((String) -> Void)?
@@ -63,4 +56,20 @@ final class FakeGameLink: GameLink {
         lock.lock(); defer { lock.unlock() }
         return _sent.last.flatMap { MessageCodec.decodeState($0) }
     }
+}
+
+/// GameLink whose send(_:) hands lines to the host and whose onLine can be driven externally.
+final class ProxyLink: GameLink {
+    var onLine: ((String) -> Void)?
+    var onClosed: (() -> Void)?
+    private let receiveToHost: (String) -> Void
+    private let onClose: (() -> Void)
+
+    init(receiveToHost: @escaping (String) -> Void, onClose: @escaping () -> Void) {
+        self.receiveToHost = receiveToHost
+        self.onClose = onClose
+    }
+
+    func send(_ line: String) throws { receiveToHost(line) }
+    func close() { onClose() }
 }
