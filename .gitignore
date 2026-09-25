@@ -13,6 +13,9 @@ Pods/
 .build/
 .swiftpm/
 
+# Git worktrees
+.worktrees/
+
 # macOS
 .DS_Store
 
