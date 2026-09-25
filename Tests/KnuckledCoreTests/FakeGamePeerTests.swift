@@ -62,7 +62,8 @@ final class FakeGamePeerTests: XCTestCase {
         XCTAssertNotEqual(gh.state.status, .IN_PROGRESS, "game should finish (steps=\(guardCount))")
         if gh.state.status == .FINISHED { XCTAssertNotNil(gh.state.winner) }
         XCTAssertEqual(gh.state.clientName, FakeGamePeer.name)
-        XCTAssertFalse(clientLines.isEmpty)
+        pumpLock.lock(); let empty = clientLines.isEmpty; pumpLock.unlock()
+        XCTAssertFalse(empty)
     }
 
     func testRunFakeHostBotPlaysItsTurnsToTerminalState() {
