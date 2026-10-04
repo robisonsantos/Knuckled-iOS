@@ -568,7 +568,7 @@ Write the file EXACTLY as below. Object IDs are fixed 24-hex strings — transcr
 /* Begin XCLocalSwiftPackageReference section */
 		450000000000000000000001 /* XCRemoteSwiftPackageReference "KnuckledCore" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = ..;
+			relativePath = .;
 		};
 /* End XCLocalSwiftPackageReference section */
 
@@ -782,7 +782,7 @@ Write EXACTLY (BlueprintIdentifiers must match the PBXNativeTarget IDs from Step
 
 Run: `DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcodebuild -list -project Knuckled.xcodeproj`
 Expected: lists targets `Knuckled`, `KnuckledTests`, `KnuckledUITests` and scheme `Knuckled`, with no "missing package" error. (A full build comes in Task 9 — Swift sources don't exist yet, so `build` would fail on missing files; do NOT run it here.)
-Troubleshooting: if the local package fails to resolve (`relativePath = ..` in Step 1), verify `Package.swift` exists at the repo root and the `.xcodeproj` sits beside it; `xcodebuild -resolvePackageDependencies -project Knuckled.xcodeproj` shows the resolution. Do not restructure — fix the path.
+Troubleshooting (resolved during implementation — record): Xcode resolves the local-package path relative to the project directory (repo root, where `Package.swift` lives), so the correct value is `relativePath = .` as written above. If the package ever fails to resolve, verify `Package.swift` sits beside the `.xcodeproj`; `xcodebuild -resolvePackageDependencies -project Knuckled.xcodeproj` shows the resolution. Do not restructure — fix the path.
 
 - [ ] **Step 5: Commit**
 
@@ -826,9 +826,9 @@ enum AppColors {
 }
 
 enum AppFont {
-    /// Cinzel Bold for display text (title, PIN, scores). Falls back to system bold if the font is missing.
+    /// Cinzel Bold for display text (title, PIN, scores). The name must match the font's Bold instance; a missing name silently falls back to system (packaging bug — verify in the Task 9 screenshot).
     static func display(size: CGFloat) -> Font {
-        .custom("Cinzel-Bold", size: size, relativeTo: .largeTitle)
+        .custom("CinzelRoman-Bold", size: size, relativeTo: .largeTitle)
     }
 }
 
@@ -850,8 +850,8 @@ struct GlassCard<Content: View>: View {
     var body: some View {
         content
             .background(AppColors.glassWhite)
-            .overlay(RoundedRectangle(cornerRadius: 16).stroke(AppColors.glassBorderGold, lineWidth: 1))
             .clipShape(RoundedRectangle(cornerRadius: 16))
+            .overlay(RoundedRectangle(cornerRadius: 16).stroke(AppColors.glassBorderGold, lineWidth: 1))
     }
 }
 
@@ -875,12 +875,14 @@ struct GoldButtonStyle: ButtonStyle {
 }
 
 struct GoldSecondaryButtonStyle: ButtonStyle {
+    @Environment(\.isEnabled) private var isEnabled
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(maxWidth: .infinity)
             .padding(.vertical, 14)
             .background(AppColors.gold.opacity(0.25))
             .foregroundStyle(AppColors.gold)
+            .opacity(isEnabled ? 1 : 0.4)
             .clipShape(RoundedRectangle(cornerRadius: 28))
             .scaleEffect(configuration.isPressed ? 0.97 : 1.0)
     }
@@ -949,7 +951,7 @@ final class GameSessionTests: XCTestCase {
         try waitFor(session.state!.phase == .AWAITING_PLACEMENT, timeout: 10)
         XCTAssertEqual(session.state!.lastRoll, 3)
         session.place(0)
-        XCTAssertEqual(session.state!.grid[.HOST]![0], [3])
+        try waitFor(session.state!.grid[.HOST]![0] == [3], timeout: 10)
         // CPU answers on its turn (think delays are 0 in this session)
         try waitFor(session.state!.currentTurn == .HOST, timeout: 10)
         XCTAssertEqual(session.state!.grid[.CLIENT]!.flatMap { $0 }.count, 1)
@@ -1030,6 +1032,7 @@ final class GameSession: ObservableObject {
         preRollDelayMs: Double = CpuPacing.preRollSeconds,
         thinkDelay: @escaping () -> Double = CpuPacing.naturalThink
     ) {
+        disconnect()
         let clean = MessageCodec.sanitizeName(name)
         let (humanLink, cpuLink) = InMemoryLinkPair.make()
         runCpuClient(cpuLink, preRollDelayMs: preRollDelayMs, thinkDelay: thinkDelay)
@@ -1108,6 +1111,7 @@ final class ColumnDisplayTests: XCTestCase {
 
     func testPeerColumnPadsAbove() {
         XCTAssertEqual(peerColumnTopToBottom([3, 3]), [nil, 3, 3])
+        XCTAssertEqual(peerColumnTopToBottom([2, 3]), [nil, 3, 2])
         XCTAssertEqual(peerColumnTopToBottom([]), [nil, nil, nil])
     }
 }
@@ -1130,9 +1134,10 @@ func ownColumnTopToBottom(_ dice: [Int]) -> [Int?] {
     dice.map { Optional($0) } + Array(repeating: nil, count: max(0, 3 - dice.count))
 }
 
-/// Peer board: oldest die nearest the middle (bottom). Returns exactly 3 rows, bottom-anchored.
+/// Peer board: oldest die nearest the middle (bottom). Newest-first after front-padding.
+/// Returns exactly 3 rows, bottom-anchored. Mirrors Android `topColumnTopToBottom`.
 func peerColumnTopToBottom(_ dice: [Int]) -> [Int?] {
-    Array(repeating: nil, count: max(0, 3 - dice.count)) + dice.map { Optional($0) }
+    Array(repeating: nil, count: max(0, 3 - dice.count)) + dice.reversed().map { Optional($0) }
 }
 
 struct DieCell: View {
@@ -1140,7 +1145,7 @@ struct DieCell: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 8)
-                .fill(AppColors.glassWhite.opacity(value == nil ? 0.25 : 1))
+                .fill(value == nil ? Color.white.opacity(0.25) : AppColors.glassWhite)
                 .frame(width: 52, height: 52)
             if let value {
                 Text("\(value)")
@@ -1174,7 +1179,8 @@ struct GameBoard: View {
     let onColumnTap: ((Int) -> Void)?
 
     private func columnPlaceable(_ column: Int) -> Bool {
-        onColumnTap != nil && active && canPlace && grid[column].count < 3
+        guard column < grid.count else { return false }
+        return onColumnTap != nil && active && canPlace && grid[column].count < 3
     }
 
     var body: some View {
@@ -1207,7 +1213,7 @@ struct GameBoard: View {
     }
 
     private func columnView(_ column: Int) -> some View {
-        let dice = grid[column]
+        let dice = column < grid.count ? grid[column] : []
         let cells = isMine ? ownColumnTopToBottom(dice) : peerColumnTopToBottom(dice)
         let placeable = columnPlaceable(column)
         return VStack(spacing: 4) {
