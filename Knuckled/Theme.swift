@@ -15,9 +15,9 @@ enum AppColors {
 }
 
 enum AppFont {
-    /// Cinzel Bold for display text (title, PIN, scores). Falls back to system bold if the font is missing.
+    /// Cinzel Bold for display text (title, PIN, scores). The name must match the font's Bold instance; a missing name silently falls back to system (packaging bug — verify in the Task 9 screenshot).
     static func display(size: CGFloat) -> Font {
-        .custom("Cinzel-Bold", size: size, relativeTo: .largeTitle)
+        .custom("CinzelRoman-Bold", size: size, relativeTo: .largeTitle)
     }
 }
 
@@ -39,8 +39,8 @@ struct GlassCard<Content: View>: View {
     var body: some View {
         content
             .background(AppColors.glassWhite)
-            .overlay(RoundedRectangle(cornerRadius: 16).stroke(AppColors.glassBorderGold, lineWidth: 1))
             .clipShape(RoundedRectangle(cornerRadius: 16))
+            .overlay(RoundedRectangle(cornerRadius: 16).stroke(AppColors.glassBorderGold, lineWidth: 1))
     }
 }
 
@@ -64,12 +64,14 @@ struct GoldButtonStyle: ButtonStyle {
 }
 
 struct GoldSecondaryButtonStyle: ButtonStyle {
+    @Environment(\.isEnabled) private var isEnabled
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(maxWidth: .infinity)
             .padding(.vertical, 14)
             .background(AppColors.gold.opacity(0.25))
             .foregroundStyle(AppColors.gold)
+            .opacity(isEnabled ? 1 : 0.4)
             .clipShape(RoundedRectangle(cornerRadius: 28))
             .scaleEffect(configuration.isPressed ? 0.97 : 1.0)
     }
