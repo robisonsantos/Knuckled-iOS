@@ -16,7 +16,7 @@ struct DieCell: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 8)
-                .fill(AppColors.glassWhite.opacity(value == nil ? 0.25 : 1))
+                .fill(value == nil ? Color.white.opacity(0.25) : AppColors.glassWhite)
                 .frame(width: 52, height: 52)
             if let value {
                 Text("\(value)")
@@ -50,7 +50,8 @@ struct GameBoard: View {
     let onColumnTap: ((Int) -> Void)?
 
     private func columnPlaceable(_ column: Int) -> Bool {
-        onColumnTap != nil && active && canPlace && grid[column].count < 3
+        guard column < grid.count else { return false }
+        return onColumnTap != nil && active && canPlace && grid[column].count < 3
     }
 
     var body: some View {
@@ -83,7 +84,7 @@ struct GameBoard: View {
     }
 
     private func columnView(_ column: Int) -> some View {
-        let dice = grid[column]
+        let dice = column < grid.count ? grid[column] : []
         let cells = isMine ? ownColumnTopToBottom(dice) : peerColumnTopToBottom(dice)
         let placeable = columnPlaceable(column)
         return VStack(spacing: 4) {
