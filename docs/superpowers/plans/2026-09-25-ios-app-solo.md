@@ -1683,8 +1683,8 @@ final class SoloSmokeTests: XCTestCase {
         nameField.typeText("Tester")
         app.buttons["single-player-button"].tap()
 
-        XCTAssertTrue(app.otherElements["own-board"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.otherElements["peer-board"].exists)
+        XCTAssertTrue(app.staticTexts["own-board"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["peer-board"].exists)
         XCTAssertTrue(app.buttons["dice"].waitForExistence(timeout: 5))
 
         // Wait for our turn (CPU may move first), then roll.
@@ -1693,12 +1693,14 @@ final class SoloSmokeTests: XCTestCase {
         waitForEnabled(dice, timeout: 30)
         dice.tap()
 
-        // Awaiting placement → place in column 0.
+        // Awaiting placement → place in column 0 (scroll it into view first;
+        // the column container exposes its label on a StaticText child).
         XCTAssertTrue(app.staticTexts["place-hint"].waitForExistence(timeout: 10))
-        app.otherElements["own-col-0"].tap()
+        app.swipeUp()
+        app.staticTexts["own column 0"].tap()
 
         // Game continues (no crash): boards still present.
-        XCTAssertTrue(app.otherElements["own-board"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["own-board"].waitForExistence(timeout: 10))
     }
 
     private func waitForEnabled(_ element: XCUIElement, timeout: TimeInterval) {
@@ -1710,7 +1712,7 @@ final class SoloSmokeTests: XCTestCase {
 }
 ```
 
-Notes: `GameBoard` root is a `VStack` → XCUITest sees it as `otherElements` (plus the explicit identifiers). Column containers are `VStack.onTapGesture` (not `Button`) → they appear as `otherElements["own-col-0"]` and are tappable. `DieView` root IS a `Button` → `app.buttons["dice"]`, enabled only when tappable. If any query shape mismatches at runtime, adjust the queries (not the app) and report the change.
+Notes: `GameBoard` root is a `VStack` → XCUITest surfaces the identifier on `staticTexts` children (not `otherElements`). Column containers are `VStack.onTapGesture` (not `Button`) → query the `accessibilityLabel` (`"own column 0"`) via `staticTexts` and tap (coordinates land in the column); `swipeUp()` first if the column may be below the fold. `DieView` root IS a `Button` → `app.buttons["dice"]`, enabled only when tappable. If any query shape mismatches at runtime, adjust the queries (not the app) and report the change.
 
 - [ ] **Step 4: Commit**
 
