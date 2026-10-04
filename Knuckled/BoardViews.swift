@@ -43,7 +43,7 @@ struct ColumnScoreChip: View {
 struct GameBoard: View {
     let isMine: Bool
     let name: String
-    let grid: Grid
+    let grid: KnuckledCore.Grid
     let destroyed: [DieRef]
     let active: Bool
     let canPlace: Bool
