@@ -93,25 +93,41 @@ struct GameBoard: View {
         let dice = column < grid.count ? grid[column] : []
         let cells = isMine ? ownColumnTopToBottom(dice) : peerColumnTopToBottom(dice)
         let placeable = columnPlaceable(column)
+        // Chip outside the outline (Android parity): above the box on our
+        // board, below the box (under ghosts) on the peer board.
         return VStack(spacing: 4) {
-            VStack(spacing: 4) {
-                if isMine { ColumnScoreChip(value: KnucklebonesRules.columnScore(dice)) }
-                ForEach(0..<cells.count, id: \.self) { row in
-                    DieCell(value: cells[row])
-                }
-                if !isMine { ColumnScoreChip(value: KnucklebonesRules.columnScore(dice)) }
-            }
-            .padding(2)
-            .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(placeable ? AppColors.gold : AppColors.glassBorderGold, lineWidth: 1)
-            )
-            .accessibilityIdentifier("\(isMine ? "own" : "peer")-col-\(column)")
-            .accessibilityLabel("\(isMine ? "own" : "peer") column \(column)")
-            .onTapGesture {
-                if placeable { onColumnTap?(column) }
-            }
+            if isMine { ColumnScoreChip(value: KnucklebonesRules.columnScore(dice)) }
+            diceBox(cells: cells, placeable: placeable, column: column)
             destroyGhosts(column: column)
+            if !isMine { ColumnScoreChip(value: KnucklebonesRules.columnScore(dice)) }
+        }
+    }
+
+    /// The bordered dice box. Own columns are real Buttons (disabled unless
+    /// placeable) so tap state is explicit to VoiceOver and UI tests; peer
+    /// columns are never interactive.
+    @ViewBuilder
+    private func diceBox(cells: [Int?], placeable: Bool, column: Int) -> some View {
+        let box = VStack(spacing: 4) {
+            ForEach(0..<cells.count, id: \.self) { row in
+                DieCell(value: cells[row])
+            }
+        }
+        .padding(2)
+        .overlay(
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(placeable ? AppColors.gold : AppColors.glassBorderGold, lineWidth: 1)
+        )
+        if isMine {
+            Button(action: { if placeable { onColumnTap?(column) } }) { box }
+                .buttonStyle(.plain)
+                .disabled(!placeable)
+                .accessibilityIdentifier("own-col-\(column)")
+                .accessibilityLabel("own column \(column)")
+        } else {
+            box
+                .accessibilityIdentifier("peer-col-\(column)")
+                .accessibilityLabel("peer column \(column)")
         }
     }
 

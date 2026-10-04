@@ -23,9 +23,11 @@ final class SoloSmokeTests: XCTestCase {
         dice.tap()
 
         // Awaiting placement → scroll own column 0 into view, then place.
+        // (Query by label: the board identifier stamps every child element,
+        // so per-column identifiers never surface — labels do.)
         XCTAssertTrue(app.staticTexts["place-hint"].waitForExistence(timeout: 10))
         app.swipeUp()
-        app.staticTexts["own column 0"].tap()
+        app.buttons["own column 0"].tap()
 
         // Game continues (no crash): boards still present.
         XCTAssertTrue(app.staticTexts["own-board"].waitForExistence(timeout: 10))
@@ -54,7 +56,6 @@ final class SoloSmokeTests: XCTestCase {
         app.buttons["single-player-button"].tap()
         XCTAssertTrue(app.staticTexts["own-board"].waitForExistence(timeout: 10))
 
-        var col = 0
         var resultSeen = false
         for _ in 0..<60 {
             if app.staticTexts["winner-overlay"].exists || app.staticTexts["draw-overlay"].exists {
@@ -63,10 +64,15 @@ final class SoloSmokeTests: XCTestCase {
             }
             if app.staticTexts["place-hint"].waitForExistence(timeout: 4) {
                 app.swipeUp()
-                // firstMatch: filled dice cells inherit the container label,
-                // so the query can match more than once mid-game.
-                app.staticTexts["own column \(col % 3)"].firstMatch.tap()
-                col += 1
+                // Tap the first enabled column (full columns are disabled).
+                // Query by label: the board identifier stamps every child.
+                for c in 0..<3 {
+                    let button = app.buttons["own column \(c)"]
+                    if button.exists && button.isEnabled {
+                        button.tap()
+                        break
+                    }
+                }
                 continue
             }
             if isEnabled(app.buttons["dice"], timeout: 4) {
