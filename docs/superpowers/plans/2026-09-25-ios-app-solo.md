@@ -12,6 +12,8 @@
 
 **Environment rule (every task):** this machine's `xcode-select` points at CommandLineTools and `sudo` is unavailable. Prefix EVERY `xcodebuild`/`xcrun` invocation with `DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer`, e.g. `DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcodebuild -list`. Bare `xcodebuild` fails.
 
+**SwiftUI gotchas learned (apply in all later tasks):** (1) Never call `.opacity()` on a concrete `Color`/`LinearGradient` — `ShapeStyle.opacity` vs `View.opacity` is ambiguous; hoist to a View-typed chain or use `Color(red:green:blue:opacity:)`. (2) `KnuckledCore.Grid` collides with `SwiftUI.Grid` — always qualify as `KnuckledCore.Grid` in views. (3) Font PostScript names must match the variable-font instance (`CinzelRoman-Bold`), not the file name.
+
 ---
 
 ### Task 0: Environment preflight
@@ -820,8 +822,8 @@ enum AppColors {
     static let ivory = Color(red: 0xF3 / 255.0, green: 0xE7 / 255.0, blue: 0xC3 / 255.0)
     static let dieIvoryLight = Color(red: 0xFF / 255.0, green: 0xFA / 255.0, blue: 0xF0 / 255.0)
     static let pipBrown = Color(red: 0x1A / 255.0, green: 0x12 / 255.0, blue: 0x07 / 255.0)
-    static let glassWhite = Color.white.opacity(0.07)
-    static let glassBorderGold = AppColors.gold.opacity(0.45)
+    static let glassWhite = Color(red: 1, green: 1, blue: 1, opacity: 0.07)
+    static let glassBorderGold = Color(red: 0xE2 / 255.0, green: 0xC2 / 255.0, blue: 0x6A / 255.0, opacity: 0.45)
     static let error = Color(red: 0xE5 / 255.0, green: 0x73 / 255.0, blue: 0x73 / 255.0)
 }
 
@@ -866,9 +868,9 @@ struct GoldButtonStyle: ButtonStyle {
                     colors: [AppColors.gold, AppColors.goldDark],
                     startPoint: .leading, endPoint: .trailing
                 )
-                .opacity(isEnabled ? 1 : 0.4)
             )
             .foregroundStyle(AppColors.pipBrown)
+            .opacity(isEnabled ? 1 : 0.4)
             .clipShape(RoundedRectangle(cornerRadius: 28))
             .scaleEffect(configuration.isPressed ? 0.97 : 1.0)
     }
@@ -880,7 +882,7 @@ struct GoldSecondaryButtonStyle: ButtonStyle {
         configuration.label
             .frame(maxWidth: .infinity)
             .padding(.vertical, 14)
-            .background(AppColors.gold.opacity(0.25))
+            .background(Color(red: 0xE2 / 255.0, green: 0xC2 / 255.0, blue: 0x6A / 255.0, opacity: 0.25))
             .foregroundStyle(AppColors.gold)
             .opacity(isEnabled ? 1 : 0.4)
             .clipShape(RoundedRectangle(cornerRadius: 28))
@@ -1145,7 +1147,7 @@ struct DieCell: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 8)
-                .fill(value == nil ? Color.white.opacity(0.25) : AppColors.glassWhite)
+                .fill(value == nil ? Color(red: 1, green: 1, blue: 1, opacity: 0.25) : AppColors.glassWhite)
                 .frame(width: 52, height: 52)
             if let value {
                 Text("\(value)")
@@ -1244,7 +1246,7 @@ struct GameBoard: View {
                 ForEach(0..<ghosts.count, id: \.self) { _ in
                     ZStack {
                         RoundedRectangle(cornerRadius: 8)
-                            .fill(Color.red.opacity(0.35))
+                            .fill(Color(red: 1, green: 0, blue: 0, opacity: 0.35))
                             .frame(width: 30, height: 30)
                         Text("×").foregroundStyle(.white)
                     }
@@ -1372,7 +1374,7 @@ struct WinnerOverlay: View {
         let winnerScore = KnucklebonesRules.totalScore(state.grid[winner]!)
         let loserScore = KnucklebonesRules.totalScore(state.grid[state.opponentOf(winner)]!)
         ZStack {
-            AppColors.feltDark.opacity(0.85).ignoresSafeArea()
+            Color(red: 0x07 / 255.0, green: 0x1A / 255.0, blue: 0x10 / 255.0, opacity: 0.85).ignoresSafeArea()
             VStack(spacing: 16) {
                 Text(isWinner ? "🏆" : "🎲").font(.system(size: 72))
                 Text(isWinner ? "You win!" : "You lose!")
@@ -1407,7 +1409,7 @@ struct DrawOverlay: View {
         let myScore = KnucklebonesRules.totalScore(state.grid[myId]!)
         let peerScore = KnucklebonesRules.totalScore(state.grid[state.opponentOf(myId)]!)
         ZStack {
-            AppColors.feltDark.opacity(0.85).ignoresSafeArea()
+            Color(red: 0x07 / 255.0, green: 0x1A / 255.0, blue: 0x10 / 255.0, opacity: 0.85).ignoresSafeArea()
             VStack(spacing: 16) {
                 Text("🎲").font(.system(size: 72))
                 Text("Draw")
@@ -1545,7 +1547,7 @@ struct GameScreen: View {
 
     private var leaveConfirm: some View {
         ZStack {
-            Color.black.opacity(0.5).ignoresSafeArea()
+            Color(red: 0, green: 0, blue: 0, opacity: 0.5).ignoresSafeArea()
             VStack(spacing: 16) {
                 Text("Leave game?").font(.headline).foregroundStyle(AppColors.ivory)
                 Text("Are you sure? Your progress will be lost.").font(.body).foregroundStyle(AppColors.ivory)
