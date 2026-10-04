@@ -39,6 +39,7 @@ final class GameSession: ObservableObject {
         preRollDelayMs: Double = CpuPacing.preRollSeconds,
         thinkDelay: @escaping () -> Double = CpuPacing.naturalThink
     ) {
+        disconnect()
         let clean = MessageCodec.sanitizeName(name)
         let (humanLink, cpuLink) = InMemoryLinkPair.make()
         runCpuClient(cpuLink, preRollDelayMs: preRollDelayMs, thinkDelay: thinkDelay)
