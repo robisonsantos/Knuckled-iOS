@@ -4,7 +4,7 @@ import Foundation
 /// `send` throws after close; `onClosed` fires at most once.
 /// Callers MUST call `close()` when done: the reader thread retains the link
 /// until the input is closed, so a never-closed link parks a thread for the
-/// process lifetime.
+/// process lifetime. Ownership note: the reader thread retains the link only once started (asynchronous) — owners must retain both link ends (and the bot closures' weak captures retain nothing) for the whole session, or the peer silently never starts.
 public protocol GameLink: AnyObject {
     var onLine: ((String) -> Void)? { get set }
     var onClosed: (() -> Void)? { get set }
