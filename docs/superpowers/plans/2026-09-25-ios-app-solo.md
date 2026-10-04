@@ -1201,8 +1201,9 @@ struct GameBoard: View {
     }
 
     /// The three columns side by side (Android: Row + SpaceEvenly).
+    /// Top-aligned so a ghost row below one column never shifts its container.
     private var columnsRow: some View {
-        HStack(spacing: 6) {
+        HStack(alignment: .top, spacing: 6) {
             ForEach(0..<3, id: \.self) { column in
                 columnView(column)
             }
@@ -1250,19 +1251,44 @@ struct GameBoard: View {
 
     @ViewBuilder
     private func destroyGhosts(column: Int) -> some View {
-        let ghosts = destroyed.filter { $0.column == column }
-        if !ghosts.isEmpty {
-            HStack(spacing: 4) {
-                ForEach(0..<ghosts.count, id: \.self) { _ in
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 8)
-                            .fill(Color(red: 1, green: 0, blue: 0, opacity: 0.35))
-                            .frame(width: 30, height: 30)
-                        Text("×").foregroundStyle(.white)
+        DestroyGhosts(ghosts: destroyed.filter { $0.column == column })
+    }
+}
+
+/// Transient destroy markers: appear below the column, fade out and remove
+/// after ~500ms (Android parity: ghost fade). A new destroy restarts the timer.
+struct DestroyGhosts: View {
+    let ghosts: [DieRef]
+    @State private var present = true
+    @State private var opacity = 1.0
+
+    var body: some View {
+        Group {
+            if present && !ghosts.isEmpty {
+                HStack(spacing: 4) {
+                    ForEach(0..<ghosts.count, id: \.self) { _ in
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(Color(red: 1, green: 0, blue: 0, opacity: 0.35))
+                                .frame(width: 30, height: 30)
+                            Text("×").foregroundStyle(.white)
+                        }
                     }
                 }
+                .opacity(opacity)
             }
-            .transition(.opacity)
+        }
+        .task(id: ghosts) {
+            guard !ghosts.isEmpty else { return }
+            present = true
+            opacity = 1
+            withAnimation(.linear(duration: 0.5)) { opacity = 0 }
+            do {
+                try await Task.sleep(for: .milliseconds(500))
+            } catch {
+                return
+            }
+            present = false
         }
     }
 }
