@@ -45,7 +45,7 @@ final class GameSessionTests: XCTestCase {
         try waitFor(session.state!.phase == .AWAITING_PLACEMENT, timeout: 10)
         XCTAssertEqual(session.state!.lastRoll, 3)
         session.place(0)
-        XCTAssertEqual(session.state!.grid[.HOST]![0], [3])
+        try waitFor(session.state!.grid[.HOST]![0] == [3], timeout: 10)
         // CPU answers on its turn (think delays are 0 in this session)
         try waitFor(session.state!.currentTurn == .HOST, timeout: 10)
         XCTAssertEqual(session.state!.grid[.CLIENT]!.flatMap { $0 }.count, 1)
