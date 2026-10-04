@@ -93,22 +93,24 @@ struct GameBoard: View {
         let cells = isMine ? ownColumnTopToBottom(dice) : peerColumnTopToBottom(dice)
         let placeable = columnPlaceable(column)
         return VStack(spacing: 4) {
-            if isMine { ColumnScoreChip(value: KnucklebonesRules.columnScore(dice)) }
-            ForEach(0..<cells.count, id: \.self) { row in
-                DieCell(value: cells[row])
+            VStack(spacing: 4) {
+                if isMine { ColumnScoreChip(value: KnucklebonesRules.columnScore(dice)) }
+                ForEach(0..<cells.count, id: \.self) { row in
+                    DieCell(value: cells[row])
+                }
+                if !isMine { ColumnScoreChip(value: KnucklebonesRules.columnScore(dice)) }
             }
-            if !isMine { ColumnScoreChip(value: KnucklebonesRules.columnScore(dice)) }
+            .padding(2)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(placeable ? AppColors.gold : AppColors.glassBorderGold, lineWidth: 1)
+            )
+            .accessibilityIdentifier("\(isMine ? "own" : "peer")-col-\(column)")
+            .accessibilityLabel("\(isMine ? "own" : "peer") column \(column)")
+            .onTapGesture {
+                if placeable { onColumnTap?(column) }
+            }
             destroyGhosts(column: column)
-        }
-        .padding(2)
-        .overlay(
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(placeable ? AppColors.gold : AppColors.glassBorderGold, lineWidth: 1)
-        )
-        .accessibilityIdentifier("\(isMine ? "own" : "peer")-col-\(column)")
-        .accessibilityLabel("\(isMine ? "own" : "peer") column \(column)")
-        .onTapGesture {
-            if placeable { onColumnTap?(column) }
         }
     }
 
