@@ -13,7 +13,7 @@ struct WinnerOverlay: View {
         let winnerScore = KnucklebonesRules.totalScore(state.grid[winner]!)
         let loserScore = KnucklebonesRules.totalScore(state.grid[state.opponentOf(winner)]!)
         ZStack {
-            AppColors.feltDark.opacity(0.85).ignoresSafeArea()
+            Color(red: 0x07 / 255.0, green: 0x1A / 255.0, blue: 0x10 / 255.0, opacity: 0.85).ignoresSafeArea()
             VStack(spacing: 16) {
                 Text(isWinner ? "🏆" : "🎲").font(.system(size: 72))
                 Text(isWinner ? "You win!" : "You lose!")
@@ -48,7 +48,7 @@ struct DrawOverlay: View {
         let myScore = KnucklebonesRules.totalScore(state.grid[myId]!)
         let peerScore = KnucklebonesRules.totalScore(state.grid[state.opponentOf(myId)]!)
         ZStack {
-            AppColors.feltDark.opacity(0.85).ignoresSafeArea()
+            Color(red: 0x07 / 255.0, green: 0x1A / 255.0, blue: 0x10 / 255.0, opacity: 0.85).ignoresSafeArea()
             VStack(spacing: 16) {
                 Text("🎲").font(.system(size: 72))
                 Text("Draw")

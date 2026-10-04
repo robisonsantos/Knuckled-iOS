@@ -9,8 +9,8 @@ enum AppColors {
     static let ivory = Color(red: 0xF3 / 255.0, green: 0xE7 / 255.0, blue: 0xC3 / 255.0)
     static let dieIvoryLight = Color(red: 0xFF / 255.0, green: 0xFA / 255.0, blue: 0xF0 / 255.0)
     static let pipBrown = Color(red: 0x1A / 255.0, green: 0x12 / 255.0, blue: 0x07 / 255.0)
-    static let glassWhite = Color.white.opacity(0.07)
-    static let glassBorderGold = AppColors.gold.opacity(0.45)
+    static let glassWhite = Color(red: 1, green: 1, blue: 1, opacity: 0.07)
+    static let glassBorderGold = Color(red: 0xE2 / 255.0, green: 0xC2 / 255.0, blue: 0x6A / 255.0, opacity: 0.45)
     static let error = Color(red: 0xE5 / 255.0, green: 0x73 / 255.0, blue: 0x73 / 255.0)
 }
 
@@ -55,9 +55,9 @@ struct GoldButtonStyle: ButtonStyle {
                     colors: [AppColors.gold, AppColors.goldDark],
                     startPoint: .leading, endPoint: .trailing
                 )
-                .opacity(isEnabled ? 1 : 0.4)
             )
             .foregroundStyle(AppColors.pipBrown)
+            .opacity(isEnabled ? 1 : 0.4)
             .clipShape(RoundedRectangle(cornerRadius: 28))
             .scaleEffect(configuration.isPressed ? 0.97 : 1.0)
     }
@@ -69,7 +69,7 @@ struct GoldSecondaryButtonStyle: ButtonStyle {
         configuration.label
             .frame(maxWidth: .infinity)
             .padding(.vertical, 14)
-            .background(AppColors.gold.opacity(0.25))
+            .background(Color(red: 0xE2 / 255.0, green: 0xC2 / 255.0, blue: 0x6A / 255.0, opacity: 0.25))
             .foregroundStyle(AppColors.gold)
             .opacity(isEnabled ? 1 : 0.4)
             .clipShape(RoundedRectangle(cornerRadius: 28))

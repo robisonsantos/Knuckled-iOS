@@ -110,7 +110,7 @@ struct GameScreen: View {
 
     private var leaveConfirm: some View {
         ZStack {
-            Color.black.opacity(0.5).ignoresSafeArea()
+            Color(red: 0, green: 0, blue: 0, opacity: 0.5).ignoresSafeArea()
             VStack(spacing: 16) {
                 Text("Leave game?").font(.headline).foregroundStyle(AppColors.ivory)
                 Text("Are you sure? Your progress will be lost.").font(.body).foregroundStyle(AppColors.ivory)

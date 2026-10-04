@@ -16,7 +16,7 @@ struct DieCell: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 8)
-                .fill(value == nil ? Color.white.opacity(0.25) : AppColors.glassWhite)
+                .fill(value == nil ? Color(red: 1, green: 1, blue: 1, opacity: 0.25) : AppColors.glassWhite)
                 .frame(width: 52, height: 52)
             if let value {
                 Text("\(value)")
@@ -115,7 +115,7 @@ struct GameBoard: View {
                 ForEach(0..<ghosts.count, id: \.self) { _ in
                     ZStack {
                         RoundedRectangle(cornerRadius: 8)
-                            .fill(Color.red.opacity(0.35))
+                            .fill(Color(red: 1, green: 0, blue: 0, opacity: 0.35))
                             .frame(width: 30, height: 30)
                         Text("×").foregroundStyle(.white)
                     }
