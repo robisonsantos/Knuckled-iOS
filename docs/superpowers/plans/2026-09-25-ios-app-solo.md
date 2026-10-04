@@ -1191,15 +1191,20 @@ struct GameBoard: View {
     var body: some View {
         VStack(spacing: 6) {
             if isMine {
-                ForEach(0..<3, id: \.self) { column in
-                    columnView(column)
-                }
+                columnsRow
                 header
             } else {
                 header
-                ForEach(0..<3, id: \.self) { column in
-                    columnView(column)
-                }
+                columnsRow
+            }
+        }
+    }
+
+    /// The three columns side by side (Android: Row + SpaceEvenly).
+    private var columnsRow: some View {
+        HStack(spacing: 6) {
+            ForEach(0..<3, id: \.self) { column in
+                columnView(column)
             }
         }
     }
