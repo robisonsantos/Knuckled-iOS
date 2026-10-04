@@ -96,10 +96,18 @@ struct GameBoard: View {
         // Chip outside the outline (Android parity): above the box on our
         // board, below the box (under ghosts) on the peer board.
         return VStack(spacing: 4) {
-            if isMine { ColumnScoreChip(value: KnucklebonesRules.columnScore(dice)) }
+            if isMine {
+                ColumnScoreChip(value: KnucklebonesRules.columnScore(dice))
+                    .accessibilityIdentifier("own-chip-\(column)")
+                    .accessibilityLabel("own chip \(column)")
+            }
             diceBox(cells: cells, placeable: placeable, column: column)
             destroyGhosts(column: column)
-            if !isMine { ColumnScoreChip(value: KnucklebonesRules.columnScore(dice)) }
+            if !isMine {
+                ColumnScoreChip(value: KnucklebonesRules.columnScore(dice))
+                    .accessibilityIdentifier("peer-chip-\(column)")
+                    .accessibilityLabel("peer chip \(column)")
+            }
         }
     }
 
