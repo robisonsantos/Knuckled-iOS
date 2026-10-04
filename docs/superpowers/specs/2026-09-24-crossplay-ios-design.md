@@ -34,13 +34,13 @@ The Android link layer is byte-stream based: `Protocol` frames `\n`-terminated U
 
 ### GATT layout
 
-One custom 128-bit service (UUIDs chosen once, then frozen at first release):
+One custom 128-bit service (frozen 2026-10-04 — do NOT change after first release):
 
-| Element | Type | Role |
+| Element | UUID | Role |
 |---|---|---|
-| Service | 128-bit UUID | Advertised by host; scan filter for client |
-| Write Char | Write + WriteWithoutResponse | Client → host message bytes |
-| Notify Char | Read + Notify (subscribe via CCCD) | Host → client message bytes |
+| Service | `8B6B4A85-57B3-4BE8-ACDE-BE209FBAAE7A` | Advertised by host; scan filter for client |
+| Write Char | `AAF90241-0F50-42CF-ADFC-2BAADE92ACD1` | Write (+ WriteWithoutResponse post-handshake) — client → host message bytes |
+| Notify Char | `3FE6B62B-8DF0-4B4D-BB7E-8048B74461AA` | Read + Notify (subscribe via CCCD) — host → client message bytes |
 
 ### Framing over GATT
 
