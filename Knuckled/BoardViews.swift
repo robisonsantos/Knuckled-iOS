@@ -8,7 +8,7 @@ func ownColumnTopToBottom(_ dice: [Int]) -> [Int?] {
 
 /// Peer board: oldest die nearest the middle (bottom). Returns exactly 3 rows, bottom-anchored.
 func peerColumnTopToBottom(_ dice: [Int]) -> [Int?] {
-    Array(repeating: nil, count: max(0, 3 - dice.count)) + dice.map { Optional($0) }
+    Array(repeating: nil, count: max(0, 3 - dice.count)) + dice.reversed().map { Optional($0) }
 }
 
 struct DieCell: View {

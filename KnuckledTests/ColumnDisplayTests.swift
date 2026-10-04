@@ -11,5 +11,6 @@ final class ColumnDisplayTests: XCTestCase {
     func testPeerColumnPadsAbove() {
         XCTAssertEqual(peerColumnTopToBottom([3, 3]), [nil, 3, 3])
         XCTAssertEqual(peerColumnTopToBottom([]), [nil, nil, nil])
+        XCTAssertEqual(peerColumnTopToBottom([2, 3]), [nil, 3, 2])
     }
 }
