@@ -67,8 +67,9 @@ struct GameBoard: View {
     }
 
     /// The three columns side by side (Android: Row + SpaceEvenly).
+    /// Top-aligned so a ghost row below one column never shifts its container.
     private var columnsRow: some View {
-        HStack(spacing: 6) {
+        HStack(alignment: .top, spacing: 6) {
             ForEach(0..<3, id: \.self) { column in
                 columnView(column)
             }
