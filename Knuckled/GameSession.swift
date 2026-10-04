@@ -13,6 +13,7 @@ final class GameSession: ObservableObject {
 
     private var host: GameHost?
     private var link: GameLink?
+    private var cpuLink: GameLink?
 
     var inGame: Bool { state != nil }
 
@@ -54,6 +55,7 @@ final class GameSession: ObservableObject {
             }
         )
         self.link = humanLink
+        self.cpuLink = cpuLink
         self.host = h
         self.playerName = clean.isEmpty ? "Player" : clean
         h.connect()
@@ -77,6 +79,7 @@ final class GameSession: ObservableObject {
     func disconnect() {
         link?.close()
         link = nil
+        cpuLink = nil
         host = nil
         state = nil
     }
