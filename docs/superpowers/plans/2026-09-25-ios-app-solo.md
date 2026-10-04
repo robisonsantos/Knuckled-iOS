@@ -1727,10 +1727,10 @@ final class SoloSmokeTests: XCTestCase {
         dice.tap()
 
         // Awaiting placement → place in column 0 (scroll it into view first;
-        // the column container exposes its label on a StaticText child).
+        // columns are real Buttons queried by label — see query rule below).
         XCTAssertTrue(app.staticTexts["place-hint"].waitForExistence(timeout: 10))
         app.swipeUp()
-        app.staticTexts["own column 0"].tap()
+        app.buttons["own column 0"].tap()
 
         // Game continues (no crash): boards still present.
         XCTAssertTrue(app.staticTexts["own-board"].waitForExistence(timeout: 10))
@@ -1745,7 +1745,7 @@ final class SoloSmokeTests: XCTestCase {
 }
 ```
 
-Notes: `GameBoard` root is a `VStack` → XCUITest surfaces the identifier on `staticTexts` children (not `otherElements`). Column containers are `VStack.onTapGesture` (not `Button`) → query the `accessibilityLabel` (`"own column 0"`) via `staticTexts` and tap (coordinates land in the column); `swipeUp()` first if the column may be below the fold. `DieView` root IS a `Button` → `app.buttons["dice"]`, enabled only when tappable. If any query shape mismatches at runtime, adjust the queries (not the app) and report the change.
+**XCUITest query rule (learned the hard way):** the board-level `.accessibilityIdentifier` stamps every child element, overriding per-column identifiers — per-column `own-col-N` identifiers NEVER surface. Query in-board elements by LABEL (`app.buttons["own column 0"]`, `app.staticTexts[...]` for board roots whose labels propagate to StaticText children). Column containers that need taps must be real `Button`s (disabled unless placeable); plain `VStack.onTapGesture` columns are invisible to queries once dice are placed.
 
 - [ ] **Step 4: Commit**
 
