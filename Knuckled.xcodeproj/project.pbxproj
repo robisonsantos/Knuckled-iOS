@@ -49,6 +49,8 @@
 		9E16FC547D5653A7B2DA21B4 /* BleFramingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5698DC5A7D956FA8C9FCB14 /* BleFramingTests.swift */; };
 		D98D70B04690582C826D3B0F /* BleFraming.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D4123ED2265C548F786E06 /* BleFraming.swift */; };
 		FC464D6CAD7A574CABD39BA4 /* BleUUIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7F922E2BAA5FB6B32D964D /* BleUUIDs.swift */; };
+		909692D7E5B45EEF9CFEEFA8 /* BlePipeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8071F8972CA52CEA631C5DD /* BlePipeTests.swift */; };
+		83F930904A5C5810B6423ECF /* BlePipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4461B096E3D9500CBC163021 /* BlePipe.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +98,8 @@
 		C5698DC5A7D956FA8C9FCB14 /* BleFramingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleFramingTests.swift; sourceTree = "<group>"; };
 		E7D4123ED2265C548F786E06 /* BleFraming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLE/BleFraming.swift; sourceTree = "<group>"; };
 		7A7F922E2BAA5FB6B32D964D /* BleUUIDs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLE/BleUUIDs.swift; sourceTree = "<group>"; };
+		C8071F8972CA52CEA631C5DD /* BlePipeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlePipeTests.swift; sourceTree = "<group>"; };
+		4461B096E3D9500CBC163021 /* BlePipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLE/BlePipe.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +163,7 @@
 				1719595BF45A5A5391659887 /* ConnectionScreens.swift */,
 				E7D4123ED2265C548F786E06 /* BleFraming.swift */,
 				7A7F922E2BAA5FB6B32D964D /* BleUUIDs.swift */,
+				4461B096E3D9500CBC163021 /* BlePipe.swift */,
 			);
 			path = Knuckled;
 			sourceTree = "<group>";
@@ -173,6 +178,7 @@
 				690DAD2C05265740A2341D58 /* DiceOrientationTests.swift */,
 				4E36207F8E4F5C2B92E8BC30 /* ConnectionSessionTests.swift */,
 				C5698DC5A7D956FA8C9FCB14 /* BleFramingTests.swift */,
+				C8071F8972CA52CEA631C5DD /* BlePipeTests.swift */,
 			);
 			path = KnuckledTests;
 			sourceTree = "<group>";
@@ -366,6 +372,7 @@
 				465FD1EF91935F758756E763 /* ConnectionScreens.swift in Sources */,
 				D98D70B04690582C826D3B0F /* BleFraming.swift in Sources */,
 				FC464D6CAD7A574CABD39BA4 /* BleUUIDs.swift in Sources */,
+				83F930904A5C5810B6423ECF /* BlePipe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,6 +387,7 @@
 				A51BF73D8BA85AB4AE5ADF51 /* DiceOrientationTests.swift in Sources */,
 				FAAFBEB4FDF75B96BBF4B152 /* ConnectionSessionTests.swift in Sources */,
 				9E16FC547D5653A7B2DA21B4 /* BleFramingTests.swift in Sources */,
+				909692D7E5B45EEF9CFEEFA8 /* BlePipeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
