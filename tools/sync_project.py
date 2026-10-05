@@ -38,6 +38,7 @@ FILETYPE = {
     ".ttf": "file",
     ".wav": "audio.wav",
     ".usdz": "file",
+    ".png": "image.png",
     ".xcassets": "folder.assetcatalog",
     ".xcprivacy": "text.plist.xml",
 }
@@ -54,11 +55,13 @@ def want_files():
                 if p.suffix == ".xcassets":
                     out.append((p.relative_to(ROOT).as_posix(), "Resources", FILETYPE[".xcassets"]))
                 continue
+            if any(part.endswith(".xcassets") for part in p.parts):
+                continue  # compiled by actool via the .xcassets entry; not a loose resource
             if p.suffix in FILETYPE and not (sub == "Knuckled" and p.name == "Info.plist"):
                 kind = "Resources" if p.suffix not in (".swift",) and sub == "Knuckled" and p.parent.name == "Resources" else None
                 if p.suffix == ".swift":
                     out.append((p.relative_to(ROOT).as_posix(), sub, FILETYPE[".swift"]))
-                elif p.suffix in (".ttf", ".wav", ".usdz"):
+                elif p.suffix in (".ttf", ".wav", ".usdz", ".png"):
                     out.append((p.relative_to(ROOT).as_posix(), "Resources", FILETYPE[p.suffix]))
                 elif p.suffix == ".xcprivacy":
                     out.append((p.relative_to(ROOT).as_posix(), "Resources", FILETYPE[".xcprivacy"]))
@@ -84,15 +87,23 @@ def main() -> int:
             # (e.g. Knuckled/PrivacyInfo.xcprivacy is NOT in Knuckled/Resources/).
             if Path(rel).parent.as_posix() == "Knuckled/Resources":
                 group = RES_GROUP
+                fr_path = name
+            elif rel.startswith("Knuckled/Resources/"):
+                # resource subdir (e.g. DiceFaces/1.png): keep it in the
+                # Resources group, mirroring the hand-registered
+                # Sounds/*.wav precedent (path = Sounds/land.wav)
+                group = RES_GROUP
+                fr_path = Path(rel).relative_to("Knuckled/Resources").as_posix()
             else:
                 _, group, _ = SOURCES["Knuckled"]
+                fr_path = Path(rel).relative_to("Knuckled").as_posix() if rel.startswith("Knuckled/") else name
             group_path = "Knuckled/Resources"
         else:
             phase, group, group_path = SOURCES[target]
         fr = oid("fileref", rel)
         bf = oid("buildfile", rel)
         if target == "Resources":
-            fr_line = f"\t\t{fr} /* {name} */ = {{isa = PBXFileReference; lastKnownFileType = {ftype}; path = {name}; sourceTree = \"<group>\"; }};\n"
+            fr_line = f"\t\t{fr} /* {name} */ = {{isa = PBXFileReference; lastKnownFileType = {ftype}; path = {fr_path}; sourceTree = \"<group>\"; }};\n"
         else:
             fr_line = f"\t\t{fr} /* {name} */ = {{isa = PBXFileReference; lastKnownFileType = {ftype}; path = {name}; sourceTree = \"<group>\"; }};\n"
         bf_comment = "in Resources" if target == "Resources" else "in Sources"

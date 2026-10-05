@@ -33,6 +33,12 @@
 		A4F23A4BDE2E5854B15CCD2E /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95FA831DD9B50F59965578F /* SoundManager.swift */; };
 		94120BB8B4CE5246B21A8F2F /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6D4118AA6D5071BF99C9BF /* Haptics.swift */; };
 		35D667940E755E579A2FAE63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8756D2348BE5690823AC6E4 /* Assets.xcassets */; };
+		F2FD7923E9C45825A22429AF /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C73EBFC20405A6F9429F4AC /* 1.png */; };
+		CF6B7A4666D8543F801F2D0C /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = DBE8A70C035F586CAF710CBC /* 2.png */; };
+		BB7F12FC2785512ABA3B2234 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 7683E4CFFCA95DD7928B0F67 /* 3.png */; };
+		1772DB95A4CD55B292CB8F5D /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = F92C06840FE6595E85E2C6D1 /* 4.png */; };
+		EC6A49B87C7458B891174C4E /* 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 62E466A9C29E52839B8E29CB /* 5.png */; };
+		7DA9A536B54E5397A0BFD095 /* 6.png in Resources */ = {isa = PBXBuildFile; fileRef = 8707944AB50B5435ACCBFDF7 /* 6.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +70,12 @@
 		F95FA831DD9B50F59965578F /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		7C6D4118AA6D5071BF99C9BF /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		A8756D2348BE5690823AC6E4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3C73EBFC20405A6F9429F4AC /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DiceFaces/1.png; sourceTree = "<group>"; };
+		DBE8A70C035F586CAF710CBC /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DiceFaces/2.png; sourceTree = "<group>"; };
+		7683E4CFFCA95DD7928B0F67 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DiceFaces/3.png; sourceTree = "<group>"; };
+		F92C06840FE6595E85E2C6D1 /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DiceFaces/4.png; sourceTree = "<group>"; };
+		62E466A9C29E52839B8E29CB /* 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DiceFaces/5.png; sourceTree = "<group>"; };
+		8707944AB50B5435ACCBFDF7 /* 6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DiceFaces/6.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +175,12 @@
 				188661DB0B9257298F84FD79 /* rattle.wav */,
 				F7E3D3C4C6C55A7C8D62B179 /* tap.wav */,
 				F1007476B66B5B4E883CC7A9 /* win.wav */,
+				3C73EBFC20405A6F9429F4AC /* 1.png */,
+				DBE8A70C035F586CAF710CBC /* 2.png */,
+				7683E4CFFCA95DD7928B0F67 /* 3.png */,
+				F92C06840FE6595E85E2C6D1 /* 4.png */,
+				62E466A9C29E52839B8E29CB /* 5.png */,
+				8707944AB50B5435ACCBFDF7 /* 6.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -285,6 +303,12 @@
 				CE63230939A052EDBDE80A3A /* tap.wav in Resources */,
 				AEDD0D7C6B6A5928B71F57BC /* win.wav in Resources */,
 				35D667940E755E579A2FAE63 /* Assets.xcassets in Resources */,
+				F2FD7923E9C45825A22429AF /* 1.png in Resources */,
+				CF6B7A4666D8543F801F2D0C /* 2.png in Resources */,
+				BB7F12FC2785512ABA3B2234 /* 3.png in Resources */,
+				1772DB95A4CD55B292CB8F5D /* 4.png in Resources */,
+				EC6A49B87C7458B891174C4E /* 5.png in Resources */,
+				7DA9A536B54E5397A0BFD095 /* 6.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
