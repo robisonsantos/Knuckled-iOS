@@ -51,6 +51,10 @@
 		FC464D6CAD7A574CABD39BA4 /* BleUUIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7F922E2BAA5FB6B32D964D /* BleUUIDs.swift */; };
 		909692D7E5B45EEF9CFEEFA8 /* BlePipeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8071F8972CA52CEA631C5DD /* BlePipeTests.swift */; };
 		83F930904A5C5810B6423ECF /* BlePipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4461B096E3D9500CBC163021 /* BlePipe.swift */; };
+		72FA59A11A9F580AB9BD1D4D /* BleCentralClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B992EA51D3E65DF7A3F6A19B /* BleCentralClient.swift */; };
+		2A79353FA9AE535CB4F6AE39 /* BleConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BD2DD187AE5B0985B7A243 /* BleConnector.swift */; };
+		1E14771E9B6E5C788683A322 /* BleError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA7B60C0195342B0EFE8B9 /* BleError.swift */; };
+		DD4A136A85435940A301E845 /* BlePeripheralHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A26C3E85A7753C5B55786A9 /* BlePeripheralHost.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -100,6 +104,10 @@
 		7A7F922E2BAA5FB6B32D964D /* BleUUIDs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLE/BleUUIDs.swift; sourceTree = "<group>"; };
 		C8071F8972CA52CEA631C5DD /* BlePipeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlePipeTests.swift; sourceTree = "<group>"; };
 		4461B096E3D9500CBC163021 /* BlePipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLE/BlePipe.swift; sourceTree = "<group>"; };
+		B992EA51D3E65DF7A3F6A19B /* BleCentralClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLE/BleCentralClient.swift; sourceTree = "<group>"; };
+		54BD2DD187AE5B0985B7A243 /* BleConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLE/BleConnector.swift; sourceTree = "<group>"; };
+		14AA7B60C0195342B0EFE8B9 /* BleError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLE/BleError.swift; sourceTree = "<group>"; };
+		5A26C3E85A7753C5B55786A9 /* BlePeripheralHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLE/BlePeripheralHost.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +172,10 @@
 				E7D4123ED2265C548F786E06 /* BleFraming.swift */,
 				7A7F922E2BAA5FB6B32D964D /* BleUUIDs.swift */,
 				4461B096E3D9500CBC163021 /* BlePipe.swift */,
+				B992EA51D3E65DF7A3F6A19B /* BleCentralClient.swift */,
+				54BD2DD187AE5B0985B7A243 /* BleConnector.swift */,
+				14AA7B60C0195342B0EFE8B9 /* BleError.swift */,
+				5A26C3E85A7753C5B55786A9 /* BlePeripheralHost.swift */,
 			);
 			path = Knuckled;
 			sourceTree = "<group>";
@@ -373,6 +385,10 @@
 				D98D70B04690582C826D3B0F /* BleFraming.swift in Sources */,
 				FC464D6CAD7A574CABD39BA4 /* BleUUIDs.swift in Sources */,
 				83F930904A5C5810B6423ECF /* BlePipe.swift in Sources */,
+				72FA59A11A9F580AB9BD1D4D /* BleCentralClient.swift in Sources */,
+				2A79353FA9AE535CB4F6AE39 /* BleConnector.swift in Sources */,
+				1E14771E9B6E5C788683A322 /* BleError.swift in Sources */,
+				DD4A136A85435940A301E845 /* BlePeripheralHost.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

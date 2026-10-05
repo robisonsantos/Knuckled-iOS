@@ -18,21 +18,28 @@ final class ConnectionSession: ObservableObject {
     @Published private(set) var statusText = ""
     @Published private(set) var foundDevices: [DeviceInfo] = []
     @Published private(set) var errorText: String?
+    #if targetEnvironment(simulator)
     @Published var useFake = true
+    #else
+    @Published var useFake = false
+    #endif
 
     var isStart: Bool { if case .start = state { return true }; return false }
     var isConnected: Bool { if case .connected = state { return true }; return false }
     var hostPin: String { if case .hosting(let pin) = state { return pin }; return "" }
 
-    private let connector: BluetoothConnector
+    private let fake = FakeConnector()
+    private let ble = BleConnector()
+    private var active: BluetoothConnector { useFake ? fake : ble }
     private var selectedDevice: DeviceInfo?
     private var currentLink: GameLink?
     private var retainedLinks: [GameLink] = []
     private(set) var sanitizedName = ""
     private(set) var isHost = true
 
-    init(connector: BluetoothConnector) {
-        self.connector = connector
+    init(connector: BluetoothConnector = FakeConnector()) {
+        // `connector` retained for test/app call-site compat; transport is
+        // selected via `active` (useFake toggle). Ignored.
     }
 
     func startSinglePlayer() {
@@ -56,7 +63,7 @@ final class ConnectionSession: ObservableObject {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let self else { return }
             do {
-                let link = try self.connector.listen(pin: pin)
+                let link = try self.active.listen(pin: pin)
                 DispatchQueue.main.async { self.onConnected(link: link, peer: nil, isHost: true) }
             } catch {
                 DispatchQueue.main.async {
@@ -78,7 +85,7 @@ final class ConnectionSession: ObservableObject {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let self else { return }
             do {
-                let devices = try self.connector.discover()
+                let devices = try self.active.discover()
                 DispatchQueue.main.async {
                     self.foundDevices = devices
                     self.statusText = devices.isEmpty ? "No devices found — tap Host first" : ""
@@ -105,7 +112,7 @@ final class ConnectionSession: ObservableObject {
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let self else { return }
             do {
-                let link = try self.connector.connect(device: device, pin: pin)
+                let link = try self.active.connect(device: device, pin: pin)
                 DispatchQueue.main.async { self.onConnected(link: link, peer: device, isHost: false) }
             } catch {
                 let message = String(describing: error)
