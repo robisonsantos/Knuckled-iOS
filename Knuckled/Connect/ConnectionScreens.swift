@@ -126,6 +126,7 @@ struct EnterPinView: View {
                 .offset(x: shake ? 8 : 0)
                 .background(
                     TextField("", text: $pin)
+                        .accessibilityIdentifier("pin-field")
                         .keyboardType(.numberPad)
                         .focused($focused)
                         .opacity(0.01)

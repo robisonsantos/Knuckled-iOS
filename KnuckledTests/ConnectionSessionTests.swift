@@ -4,6 +4,44 @@ import XCTest
 
 final class ConnectionSessionTests: XCTestCase {
 
+    /// Cancellable blocking mock: proves cancel reaches the radio and that
+    /// discover+connect share one connector instance within the session.
+    final class MockConnector: BluetoothConnector {
+        let enteredListen = DispatchSemaphore(value: 0)
+        let releaseListen = DispatchSemaphore(value: 0)
+        var cancelCalled = false
+        var discoverDevices: [DeviceInfo] = []
+        var connectDevices: [DeviceInfo] = []
+        var retained: [GameLink] = []
+
+        func listen(pin: String) throws -> GameLink {
+            enteredListen.signal()
+            _ = releaseListen.wait(timeout: .now() + 15)
+            if cancelCalled { throw FakeConnectorError.cancelled }
+            let (a, b) = InMemoryLinkPair.make()
+            retained.append(b)
+            return a
+        }
+
+        func connect(device: DeviceInfo, pin: String) throws -> GameLink {
+            connectDevices.append(device)
+            let (a, b) = InMemoryLinkPair.make()
+            retained.append(b)
+            return a
+        }
+
+        func discover() throws -> [DeviceInfo] { discoverDevices }
+
+        func cancel() {
+            cancelCalled = true
+            releaseListen.signal()
+        }
+    }
+
+    private func mockSession(_ mock: MockConnector) -> ConnectionSession {
+        ConnectionSession(connector: mock)
+    }
+
     private func waitFor(_ condition: @autoclosure () -> Bool, timeout: TimeInterval = 10) throws {
         let deadline = Date().addingTimeInterval(timeout)
         while !condition() {
@@ -72,5 +110,29 @@ final class ConnectionSessionTests: XCTestCase {
         connection.disconnect()
         XCTAssertTrue(connection.isStart)
         XCTAssertEqual(connection.statusText, "Disconnected")
+    }
+
+    func testCancelHostingReachesRadioAndReturnsToStart() throws {
+        let mock = MockConnector()
+        let connection = mockSession(mock)
+        connection.playerName = "Host"
+        connection.onHostClicked()
+        XCTAssertTrue(mock.enteredListen.wait(timeout: .now() + 10) == .success)
+        connection.cancelCurrent()
+        XCTAssertTrue(connection.isStart)
+        XCTAssertTrue(mock.cancelCalled, "cancelCurrent must call cancel() on the active connector")
+    }
+
+    func testDiscoverThenConnectSharesConnector() throws {
+        let mock = MockConnector()
+        mock.discoverDevices = [DeviceInfo(name: "Peer", address: "AA:BB:CC:DD:EE:FF")]
+        let connection = mockSession(mock)
+        connection.playerName = "Joiner"
+        connection.onDiscoverClicked()
+        try waitFor(!connection.foundDevices.isEmpty, timeout: 10)
+        connection.onDeviceSelected(connection.foundDevices[0])
+        connection.onPinEntered("1234")
+        try waitFor(connection.isConnected, timeout: 10)
+        XCTAssertEqual(mock.connectDevices, [DeviceInfo(name: "Peer", address: "AA:BB:CC:DD:EE:FF")])
     }
 }

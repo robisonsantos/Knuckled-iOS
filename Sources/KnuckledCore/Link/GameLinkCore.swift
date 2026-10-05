@@ -51,9 +51,13 @@ public final class GameLinkCore: GameLink {
         closed = true
         let handler = onClosed
         lock.unlock()
+        // Both ends always close even if the callback misbehaves
+        // (defer = try/finally parity with Android ManagedBleLink).
+        defer {
+            input.close()
+            output.close()
+        }
         handler?()
-        input.close()
-        output.close()
     }
 
     private func startReading() {

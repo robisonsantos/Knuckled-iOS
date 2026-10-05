@@ -11,8 +11,8 @@ struct KnuckledApp: App {
         let settings = SettingsStore()
         _settings = StateObject(wrappedValue: settings)
         sound = AVFoundationSoundManager(muted: settings.muted, onMutedChanged: { settings.muted = $0 })
-        // Task 14: BleConnector
-        _connection = StateObject(wrappedValue: ConnectionSession(connector: FakeConnector()))
+        // Task 14: BleConnector (default transport: fake on simulator, BLE on device)
+        _connection = StateObject(wrappedValue: ConnectionSession())
     }
 
     var body: some Scene {

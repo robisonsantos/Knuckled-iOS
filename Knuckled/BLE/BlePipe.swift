@@ -15,7 +15,6 @@ final class BlePipe: ByteSource, ByteSink {
     private var inbound = Data()
     private var closed = false
     private let cond = NSCondition()
-    private var closeFired = false
 
     func feed(_ chunk: Data) {
         cond.lock()

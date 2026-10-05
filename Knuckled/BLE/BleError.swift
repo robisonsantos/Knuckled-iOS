@@ -1,6 +1,6 @@
 import Foundation
 
-enum BleError: Error, LocalizedError {
+enum BleError: Error, LocalizedError, Equatable {
     case bluetoothOff
     case unauthorized
     case unsupported

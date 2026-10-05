@@ -12,6 +12,8 @@ enum ConnectionState {
 
 /// Connection flow state machine (Android parity: ConnectionViewModel route
 /// states, background-thread blocking calls, main-thread publishing).
+/// Transport note: Android exposes an RFCOMM/BLE toggle; iOS is BLE-only
+/// (plus the fake). Labels differ by platform by design — not renamed.
 final class ConnectionSession: ObservableObject {
     @Published private(set) var state: ConnectionState = .start
     @Published var playerName = ""
@@ -30,16 +32,20 @@ final class ConnectionSession: ObservableObject {
 
     private let fake = FakeConnector()
     private let ble = BleConnector()
-    private var active: BluetoothConnector { useFake ? fake : ble }
+    /// Injected connector (tests / previews). When set, it is the active
+    /// transport for the whole session — discover+connect share the one
+    /// instance, and cancelCurrent()/disconnect() reach it via cancel().
+    private var injected: BluetoothConnector?
+    private var active: BluetoothConnector { injected ?? (useFake ? fake : ble) }
     private var selectedDevice: DeviceInfo?
     private var currentLink: GameLink?
     private var retainedLinks: [GameLink] = []
     private(set) var sanitizedName = ""
     private(set) var isHost = true
 
-    init(connector: BluetoothConnector = FakeConnector()) {
-        // `connector` retained for test/app call-site compat; transport is
-        // selected via `active` (useFake toggle). Ignored.
+    init(connector: BluetoothConnector? = nil) {
+        // Injected transport for tests/previews; nil selects via useFake.
+        self.injected = connector
     }
 
     func startSinglePlayer() {
@@ -67,8 +73,14 @@ final class ConnectionSession: ObservableObject {
                 DispatchQueue.main.async { self.onConnected(link: link, peer: nil, isHost: true) }
             } catch {
                 DispatchQueue.main.async {
-                    self.showError(error.localizedDescription)
-                    self.state = .start
+                    // A user cancel is silent: cancelCurrent() already reset
+                    // to Start; anything else surfaces as an error.
+                    if self.isCancel(error) {
+                        self.state = .start
+                    } else {
+                        self.showError(error.localizedDescription)
+                        self.state = .start
+                    }
                 }
             }
         }
@@ -120,14 +132,27 @@ final class ConnectionSession: ObservableObject {
                 let friendly = (lower.contains("pin") || lower.contains("handshake"))
                     ? "Wrong code. Try again." : message
                 DispatchQueue.main.async {
-                    self.showError(friendly)
-                    self.state = .start
+                    // Android parity: ConnectionViewModel.resetForError()
+                    // returns to Start on connect failure (including wrong
+                    // PIN) with the error banner — iOS stays aligned.
+                    if self.isCancel(error) {
+                        self.state = .start
+                    } else {
+                        self.showError(friendly)
+                        self.state = .start
+                    }
                 }
             }
         }
     }
 
+    /// True for user-cancel errors (silent reset, no error banner).
+    private func isCancel(_ error: Error) -> Bool {
+        (error as? BleError) == .cancelled || (error as? FakeConnectorError) == .cancelled
+    }
+
     func cancelCurrent() {
+        active.cancel()
         currentLink?.close()
         retainedLinks = []
         statusText = ""
@@ -137,6 +162,7 @@ final class ConnectionSession: ObservableObject {
     }
 
     func disconnect() {
+        active.cancel()
         currentLink?.close()
         currentLink = nil
         retainedLinks = []
@@ -147,6 +173,7 @@ final class ConnectionSession: ObservableObject {
     }
 
     func onPeerDisconnected() {
+        active.cancel()
         currentLink?.close()
         currentLink = nil
         retainedLinks = []

@@ -5,12 +5,17 @@ import KnuckledCore
 /// Host side: advertises the service, waits for one subscriber, runs the PIN
 /// handshake over the byte pipe, returns a live GameLink. Blocking facade —
 /// call off the CB queue (ConnectionSession backgrounds it).
+///
+/// Threading: CoreBluetooth delegate callbacks arrive on `queue`; the
+/// blocking call runs on a session background thread. `stateLock` guards
+/// powered/powerError/cancelled across both. Timeout/poll values unchanged.
 final class BlePeripheralHost: NSObject {
     private var manager: CBPeripheralManager!
     private let queue = DispatchQueue(label: "knuckled-ble-peripheral")
     private let pipe = BlePipe()
     private var notifyChar: CBMutableCharacteristic!
     private var subscriber: CBCentral?
+    private let stateLock = NSLock()
     private var powered = false
     private var powerError: BleError?
     private let stateSem = DispatchSemaphore(value: 0)
@@ -24,7 +29,7 @@ final class BlePeripheralHost: NSObject {
     }
 
     func listen(pin: String) throws -> GameLink {
-        guard waitPoweredOn() else { throw powerError ?? .bluetoothOff }
+        guard waitPoweredOn() else { throw currentPowerError() ?? .bluetoothOff }
         let service = CBMutableService(type: BleUUIDs.service, primary: true)
         let write = CBMutableCharacteristic(
             type: BleUUIDs.write,
@@ -46,12 +51,12 @@ final class BlePeripheralHost: NSObject {
             CBAdvertisementDataLocalNameKey: BleUUIDs.localName,
         ])
         while true {
-            if cancelled { stop(); throw BleError.cancelled }
+            if isCancelled() { stop(); throw BleError.cancelled }
             if subscribedSem.wait(timeout: .now() + 0.2) == .success { break }
-            if !isUsable() { stop(); throw powerError ?? .peerLost }
+            if !isUsable() { stop(); throw currentPowerError() ?? .peerLost }
         }
         manager.stopAdvertising()
-        if let sub = subscriber {
+        if let sub = currentSubscriber() {
             pipe.mtu = sub.maximumUpdateValueLength
         }
         guard Handshake.accept(source: pipe, sink: pipe, expectedPin: pin) else {
@@ -63,9 +68,13 @@ final class BlePeripheralHost: NSObject {
     }
 
     func cancel() {
+        stateLock.lock()
         cancelled = true
+        stateLock.unlock()
         pipe.close()
         stop()
+        stateSem.signal()
+        subscribedSem.signal()
     }
 
     private func stop() {
@@ -75,28 +84,62 @@ final class BlePeripheralHost: NSObject {
 
     private func waitPoweredOn() -> Bool {
         while true {
-            if cancelled { return false }
-            if powered { return true }
-            if powerError != nil { return false }
+            stateLock.lock()
+            let done = cancelled
+            let ok = powered
+            let err = powerError
+            stateLock.unlock()
+            if done { return false }
+            if ok { return true }
+            if err != nil { return false }
             _ = stateSem.wait(timeout: .now() + 0.5)
         }
     }
 
-    private func isUsable() -> Bool { powered && powerError == nil && !cancelled }
+    private func currentPowerError() -> BleError? {
+        stateLock.lock()
+        defer { stateLock.unlock() }
+        return powerError
+    }
+
+    private func isCancelled() -> Bool {
+        stateLock.lock()
+        defer { stateLock.unlock() }
+        return cancelled
+    }
+
+    private func isUsable() -> Bool {
+        stateLock.lock()
+        defer { stateLock.unlock() }
+        return powered && powerError == nil && !cancelled
+    }
+
+    private func setPowerState(powered: Bool, error: BleError?) {
+        stateLock.lock()
+        self.powered = powered
+        self.powerError = error
+        stateLock.unlock()
+        stateSem.signal()
+    }
 
     private func notify(_ data: Data) {
         while true {
-            if pipeClosed() || subscriber == nil { return }
+            if isCancelled() || currentSubscriber() == nil { return }
             if manager.updateValue(data, for: notifyChar, onSubscribedCentrals: nil) { return }
             Thread.sleep(forTimeInterval: 0.02)
         }
     }
 
-    private func pipeClosed() -> Bool {
-        // Best-effort: a closed pipe means teardown is underway.
-        // (BlePipe has no public isClosed; the reader thread EOFs and the
-        // link layer reports disconnect — this just stops the spin.)
-        return cancelled
+    private func currentSubscriber() -> CBCentral? {
+        stateLock.lock()
+        defer { stateLock.unlock() }
+        return subscriber
+    }
+
+    private func setSubscriber(_ central: CBCentral?) {
+        stateLock.lock()
+        subscriber = central
+        stateLock.unlock()
     }
 }
 
@@ -104,39 +147,36 @@ extension BlePeripheralHost: CBPeripheralManagerDelegate {
     func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
         switch peripheral.state {
         case .poweredOn:
-            powered = true
-            powerError = nil
+            setPowerState(powered: true, error: nil)
         case .poweredOff:
-            powered = false
-            powerError = .bluetoothOff
+            setPowerState(powered: false, error: .bluetoothOff)
         case .unauthorized:
-            powered = false
-            powerError = .unauthorized
+            setPowerState(powered: false, error: .unauthorized)
         case .unsupported:
-            powered = false
-            powerError = .unsupported
+            setPowerState(powered: false, error: .unsupported)
         case .resetting, .unknown:
             break
         @unknown default:
             break
         }
         if CBPeripheralManager.authorization == .denied || CBPeripheralManager.authorization == .restricted {
-            powered = false
-            powerError = .unauthorized
+            setPowerState(powered: false, error: .unauthorized)
         }
-        stateSem.signal()
     }
 
     func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didSubscribeTo characteristic: CBCharacteristic) {
         if characteristic.uuid == BleUUIDs.notify {
-            subscriber = central
+            setSubscriber(central)
             subscribedSem.signal()
         }
     }
 
     func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didUnsubscribeFrom characteristic: CBCharacteristic) {
-        if subscriber?.identifier == central.identifier {
-            subscriber = nil
+        stateLock.lock()
+        let current = subscriber
+        stateLock.unlock()
+        if current?.identifier == central.identifier {
+            setSubscriber(nil)
         }
         pipe.close()
     }
