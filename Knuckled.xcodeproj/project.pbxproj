@@ -39,6 +39,8 @@
 		1772DB95A4CD55B292CB8F5D /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = F92C06840FE6595E85E2C6D1 /* 4.png */; };
 		EC6A49B87C7458B891174C4E /* 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 62E466A9C29E52839B8E29CB /* 5.png */; };
 		7DA9A536B54E5397A0BFD095 /* 6.png in Resources */ = {isa = PBXBuildFile; fileRef = 8707944AB50B5435ACCBFDF7 /* 6.png */; };
+		A51BF73D8BA85AB4AE5ADF51 /* DiceOrientationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690DAD2C05265740A2341D58 /* DiceOrientationTests.swift */; };
+		924867EF010B5B708375726C /* DiceOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4023E29E97AA573B80400711 /* DiceOrientation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +78,8 @@
 		F92C06840FE6595E85E2C6D1 /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DiceFaces/4.png; sourceTree = "<group>"; };
 		62E466A9C29E52839B8E29CB /* 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DiceFaces/5.png; sourceTree = "<group>"; };
 		8707944AB50B5435ACCBFDF7 /* 6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DiceFaces/6.png; sourceTree = "<group>"; };
+		690DAD2C05265740A2341D58 /* DiceOrientationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceOrientationTests.swift; sourceTree = "<group>"; };
+		4023E29E97AA573B80400711 /* DiceOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceOrientation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +137,7 @@
 				F95FA831DD9B50F59965578F /* SoundManager.swift */,
 				7C6D4118AA6D5071BF99C9BF /* Haptics.swift */,
 				A8756D2348BE5690823AC6E4 /* Assets.xcassets */,
+				4023E29E97AA573B80400711 /* DiceOrientation.swift */,
 			);
 			path = Knuckled;
 			sourceTree = "<group>";
@@ -144,6 +149,7 @@
 				410000000000000000000011 /* ColumnDisplayTests.swift */,
 				9A8EE6675C6B5F4D9B209DF6 /* SettingsStoreTests.swift */,
 				BDF3CEA8A0F5577DA2B41A02 /* SoundManagerTests.swift */,
+				690DAD2C05265740A2341D58 /* DiceOrientationTests.swift */,
 			);
 			path = KnuckledTests;
 			sourceTree = "<group>";
@@ -330,6 +336,7 @@
 				E972CDB306015AEB950F5372 /* SettingsStore.swift in Sources */,
 				A4F23A4BDE2E5854B15CCD2E /* SoundManager.swift in Sources */,
 				94120BB8B4CE5246B21A8F2F /* Haptics.swift in Sources */,
+				924867EF010B5B708375726C /* DiceOrientation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +348,7 @@
 				420000000000000000000011 /* ColumnDisplayTests.swift in Sources */,
 				8145EA50163759D794C2A6D7 /* SettingsStoreTests.swift in Sources */,
 				72FB4062D0D5501A96CB81C0 /* SoundManagerTests.swift in Sources */,
+				A51BF73D8BA85AB4AE5ADF51 /* DiceOrientationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
