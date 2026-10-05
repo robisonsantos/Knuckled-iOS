@@ -46,7 +46,7 @@ struct GameScreen: View {
                         )
                         .accessibilityIdentifier("peer-board")
                         TurnPill(state: s, myId: session.myId, peerName: s.clientName)
-                        DieView(
+                        DiceSceneView(
                             value: s.lastRoll,
                             rolling: s.phase == .ROLLING,
                             enabled: session.canRoll,

@@ -13,7 +13,6 @@
 		420000000000000000000004 /* GameSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410000000000000000000004 /* GameSession.swift */; };
 		420000000000000000000005 /* GameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410000000000000000000005 /* GameScreen.swift */; };
 		420000000000000000000006 /* BoardViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410000000000000000000006 /* BoardViews.swift */; };
-		420000000000000000000007 /* DieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410000000000000000000007 /* DieView.swift */; };
 		420000000000000000000008 /* ResultOverlays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410000000000000000000008 /* ResultOverlays.swift */; };
 		420000000000000000000009 /* CinzelBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 410000000000000000000009 /* CinzelBold.ttf */; };
 		420000000000000000000010 /* GameSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410000000000000000000010 /* GameSessionTests.swift */; };
@@ -41,6 +40,7 @@
 		7DA9A536B54E5397A0BFD095 /* 6.png in Resources */ = {isa = PBXBuildFile; fileRef = 8707944AB50B5435ACCBFDF7 /* 6.png */; };
 		A51BF73D8BA85AB4AE5ADF51 /* DiceOrientationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690DAD2C05265740A2341D58 /* DiceOrientationTests.swift */; };
 		924867EF010B5B708375726C /* DiceOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4023E29E97AA573B80400711 /* DiceOrientation.swift */; };
+		EFC636925EBF5AD181AB33F8 /* DiceSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F50B0D4C79F5742896CC497 /* DiceSceneView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,7 +50,6 @@
 		410000000000000000000004 /* GameSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSession.swift; sourceTree = "<group>"; };
 		410000000000000000000005 /* GameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScreen.swift; sourceTree = "<group>"; };
 		410000000000000000000006 /* BoardViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardViews.swift; sourceTree = "<group>"; };
-		410000000000000000000007 /* DieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DieView.swift; sourceTree = "<group>"; };
 		410000000000000000000008 /* ResultOverlays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultOverlays.swift; sourceTree = "<group>"; };
 		410000000000000000000009 /* CinzelBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CinzelBold.ttf; sourceTree = "<group>"; };
 		410000000000000000000010 /* GameSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSessionTests.swift; sourceTree = "<group>"; };
@@ -80,6 +79,7 @@
 		8707944AB50B5435ACCBFDF7 /* 6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DiceFaces/6.png; sourceTree = "<group>"; };
 		690DAD2C05265740A2341D58 /* DiceOrientationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceOrientationTests.swift; sourceTree = "<group>"; };
 		4023E29E97AA573B80400711 /* DiceOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceOrientation.swift; sourceTree = "<group>"; };
+		3F50B0D4C79F5742896CC497 /* DiceSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceSceneView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,7 +128,6 @@
 				410000000000000000000004 /* GameSession.swift */,
 				410000000000000000000005 /* GameScreen.swift */,
 				410000000000000000000006 /* BoardViews.swift */,
-				410000000000000000000007 /* DieView.swift */,
 				410000000000000000000008 /* ResultOverlays.swift */,
 				410000000000000000000013 /* Info.plist */,
 				400000000000000000000006 /* Resources */,
@@ -138,6 +137,7 @@
 				7C6D4118AA6D5071BF99C9BF /* Haptics.swift */,
 				A8756D2348BE5690823AC6E4 /* Assets.xcassets */,
 				4023E29E97AA573B80400711 /* DiceOrientation.swift */,
+				3F50B0D4C79F5742896CC497 /* DiceSceneView.swift */,
 			);
 			path = Knuckled;
 			sourceTree = "<group>";
@@ -331,12 +331,12 @@
 				420000000000000000000004 /* GameSession.swift in Sources */,
 				420000000000000000000005 /* GameScreen.swift in Sources */,
 				420000000000000000000006 /* BoardViews.swift in Sources */,
-				420000000000000000000007 /* DieView.swift in Sources */,
 				420000000000000000000008 /* ResultOverlays.swift in Sources */,
 				E972CDB306015AEB950F5372 /* SettingsStore.swift in Sources */,
 				A4F23A4BDE2E5854B15CCD2E /* SoundManager.swift in Sources */,
 				94120BB8B4CE5246B21A8F2F /* Haptics.swift in Sources */,
 				924867EF010B5B708375726C /* DiceOrientation.swift in Sources */,
+				EFC636925EBF5AD181AB33F8 /* DiceSceneView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
