@@ -21,6 +21,7 @@
 		420000000000000000000012 /* SoloSmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410000000000000000000012 /* SoloSmokeTests.swift */; };
 		420000000000000000000013 /* KnuckledCore in Frameworks */ = {isa = PBXBuildFile; productRef = 450000000000000000000002 /* KnuckledCore */; };
 		420000000000000000000014 /* KnuckledCore in Frameworks */ = {isa = PBXBuildFile; productRef = 450000000000000000000002 /* KnuckledCore */; };
+		B3D3BA711BA55DC794063E76 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 2B7B52F312825ADD8AB2AEF8 /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		410000000000000000000014 /* Knuckled.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Knuckled.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		410000000000000000000015 /* KnuckledTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KnuckledTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		410000000000000000000016 /* KnuckledUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KnuckledUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B7B52F312825ADD8AB2AEF8 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 				410000000000000000000008 /* ResultOverlays.swift */,
 				410000000000000000000013 /* Info.plist */,
 				400000000000000000000006 /* Resources */,
+				2B7B52F312825ADD8AB2AEF8 /* PrivacyInfo.xcprivacy */,
 			);
 			path = Knuckled;
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				420000000000000000000009 /* CinzelBold.ttf in Resources */,
+				B3D3BA711BA55DC794063E76 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
