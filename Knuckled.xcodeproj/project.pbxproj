@@ -41,6 +41,9 @@
 		A51BF73D8BA85AB4AE5ADF51 /* DiceOrientationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690DAD2C05265740A2341D58 /* DiceOrientationTests.swift */; };
 		924867EF010B5B708375726C /* DiceOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4023E29E97AA573B80400711 /* DiceOrientation.swift */; };
 		EFC636925EBF5AD181AB33F8 /* DiceSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F50B0D4C79F5742896CC497 /* DiceSceneView.swift */; };
+		8EB776D875025D2E852601EC /* BluetoothConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF5013E606C5DFF8D582E86 /* BluetoothConnector.swift */; };
+		313B485F8536561CA3ACABC9 /* ConnectionSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7647D3C5BD158279416FFAA /* ConnectionSession.swift */; };
+		FAAFBEB4FDF75B96BBF4B152 /* ConnectionSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E36207F8E4F5C2B92E8BC30 /* ConnectionSessionTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +83,9 @@
 		690DAD2C05265740A2341D58 /* DiceOrientationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceOrientationTests.swift; sourceTree = "<group>"; };
 		4023E29E97AA573B80400711 /* DiceOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceOrientation.swift; sourceTree = "<group>"; };
 		3F50B0D4C79F5742896CC497 /* DiceSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceSceneView.swift; sourceTree = "<group>"; };
+		EEF5013E606C5DFF8D582E86 /* BluetoothConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connect/BluetoothConnector.swift; sourceTree = "<group>"; };
+		F7647D3C5BD158279416FFAA /* ConnectionSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connect/ConnectionSession.swift; sourceTree = "<group>"; };
+		4E36207F8E4F5C2B92E8BC30 /* ConnectionSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionSessionTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +144,8 @@
 				A8756D2348BE5690823AC6E4 /* Assets.xcassets */,
 				4023E29E97AA573B80400711 /* DiceOrientation.swift */,
 				3F50B0D4C79F5742896CC497 /* DiceSceneView.swift */,
+				EEF5013E606C5DFF8D582E86 /* BluetoothConnector.swift */,
+				F7647D3C5BD158279416FFAA /* ConnectionSession.swift */,
 			);
 			path = Knuckled;
 			sourceTree = "<group>";
@@ -150,6 +158,7 @@
 				9A8EE6675C6B5F4D9B209DF6 /* SettingsStoreTests.swift */,
 				BDF3CEA8A0F5577DA2B41A02 /* SoundManagerTests.swift */,
 				690DAD2C05265740A2341D58 /* DiceOrientationTests.swift */,
+				4E36207F8E4F5C2B92E8BC30 /* ConnectionSessionTests.swift */,
 			);
 			path = KnuckledTests;
 			sourceTree = "<group>";
@@ -337,6 +346,8 @@
 				94120BB8B4CE5246B21A8F2F /* Haptics.swift in Sources */,
 				924867EF010B5B708375726C /* DiceOrientation.swift in Sources */,
 				EFC636925EBF5AD181AB33F8 /* DiceSceneView.swift in Sources */,
+				8EB776D875025D2E852601EC /* BluetoothConnector.swift in Sources */,
+				313B485F8536561CA3ACABC9 /* ConnectionSession.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,6 +360,7 @@
 				8145EA50163759D794C2A6D7 /* SettingsStoreTests.swift in Sources */,
 				72FB4062D0D5501A96CB81C0 /* SoundManagerTests.swift in Sources */,
 				A51BF73D8BA85AB4AE5ADF51 /* DiceOrientationTests.swift in Sources */,
+				FAAFBEB4FDF75B96BBF4B152 /* ConnectionSessionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

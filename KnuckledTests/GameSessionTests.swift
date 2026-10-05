@@ -2,7 +2,7 @@ import XCTest
 @testable import Knuckled
 import KnuckledCore
 
-private enum TestError: Error { case timeout }
+enum TestError: Error { case timeout }
 
 final class GameSessionTests: XCTestCase {
 
