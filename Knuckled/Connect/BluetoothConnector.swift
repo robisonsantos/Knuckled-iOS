@@ -30,6 +30,9 @@ final class FakeConnector: BluetoothConnector {
 
     func listen(pin: String) throws -> GameLink {
         guard pin == Self.pin else { throw FakeConnectorError.invalidPin }
+        // Brief hosting beat so HostingView renders before the fake client
+        // connects (mirrors real BLE latency; keeps the host UI test deterministic).
+        Thread.sleep(forTimeInterval: 2)
         let (hostLink, clientLink) = InMemoryLinkPair.make()
         runFakeClient(clientLink)
         return hostLink

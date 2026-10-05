@@ -35,6 +35,14 @@ struct GameScreen: View {
                 ScrollView {
                     VStack(spacing: 14) {
                         topBar
+                        if session.peerDisconnected {
+                            GlassCard {
+                                Text("Peer disconnected")
+                                    .foregroundStyle(AppColors.ivory)
+                                    .padding(12)
+                            }
+                            .accessibilityIdentifier("peer-banner")
+                        }
                         GameBoard(
                             isMine: false,
                             name: s.clientName,

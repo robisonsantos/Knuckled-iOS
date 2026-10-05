@@ -27,11 +27,23 @@ final class ConnectionSession: ObservableObject {
     private let connector: BluetoothConnector
     private var selectedDevice: DeviceInfo?
     private var currentLink: GameLink?
+    private var retainedLinks: [GameLink] = []
     private(set) var sanitizedName = ""
     private(set) var isHost = true
 
     init(connector: BluetoothConnector) {
         self.connector = connector
+    }
+
+    func startSinglePlayer() {
+        let clean = MessageCodec.sanitizeName(playerName)
+        guard !clean.isEmpty else { showError("Enter your name"); return }
+        sanitizedName = clean
+        isHost = true
+        let (humanLink, cpuLink) = InMemoryLinkPair.make()
+        runCpuClient(cpuLink)
+        retainedLinks.append(cpuLink)
+        onConnected(link: humanLink, peer: nil, isHost: true)
     }
 
     func onHostClicked() {
@@ -110,6 +122,7 @@ final class ConnectionSession: ObservableObject {
 
     func cancelCurrent() {
         currentLink?.close()
+        retainedLinks = []
         statusText = ""
         foundDevices = []
         selectedDevice = nil
@@ -119,6 +132,7 @@ final class ConnectionSession: ObservableObject {
     func disconnect() {
         currentLink?.close()
         currentLink = nil
+        retainedLinks = []
         statusText = "Disconnected"
         foundDevices = []
         selectedDevice = nil
@@ -128,6 +142,7 @@ final class ConnectionSession: ObservableObject {
     func onPeerDisconnected() {
         currentLink?.close()
         currentLink = nil
+        retainedLinks = []
         statusText = "Peer disconnected"
         foundDevices = []
         selectedDevice = nil

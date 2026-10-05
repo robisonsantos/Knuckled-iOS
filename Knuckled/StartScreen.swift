@@ -2,10 +2,8 @@ import SwiftUI
 import KnuckledCore
 
 struct StartScreen: View {
-    @ObservedObject var session: GameSession
+    @EnvironmentObject private var connection: ConnectionSession
     @EnvironmentObject private var settings: SettingsStore
-    @State private var name: String = ""
-    @State private var error: String?
 
     var body: some View {
         ZStack {
@@ -34,22 +32,39 @@ struct StartScreen: View {
                     }
                     .accessibilityIdentifier("hint-card")
                 }
-                TextField("Your name", text: $name)
+                TextField("Your name", text: $connection.playerName)
                     .textFieldStyle(.roundedBorder)
                     .accessibilityIdentifier("name-field")
-                if let error {
-                    Text(error).foregroundStyle(AppColors.error)
-                        .accessibilityIdentifier("name-error")
-                }
                 Button("Play vs CPU") {
-                    if MessageCodec.sanitizeName(name).isEmpty {
-                        error = "Enter your name"
-                    } else {
-                        session.startSinglePlayer(name: name)
-                    }
+                    connection.startSinglePlayer()
                 }
                 .buttonStyle(GoldButtonStyle())
                 .accessibilityIdentifier("single-player-button")
+                Button("Host a game") { connection.onHostClicked() }
+                    .buttonStyle(GoldButtonStyle())
+                    .accessibilityIdentifier("host-button")
+                Button("Join a game") { connection.onDiscoverClicked() }
+                    .buttonStyle(GoldSecondaryButtonStyle())
+                    .accessibilityIdentifier("join-button")
+                Picker("Transport", selection: $connection.useFake) {
+                    Text("Nearby").tag(false)
+                    Text("Fake").tag(true)
+                }
+                .pickerStyle(.segmented)
+                .accessibilityIdentifier("transport-picker")
+                if let error = connection.errorText {
+                    GlassCard {
+                        HStack {
+                            Text(error)
+                                .foregroundStyle(AppColors.error)
+                                .accessibilityIdentifier("connection-error")
+                            Spacer()
+                            Button("Dismiss") { connection.dismissError() }
+                                .accessibilityIdentifier("error-dismiss")
+                        }
+                        .padding(12)
+                    }
+                }
             }
             .padding(24)
             }

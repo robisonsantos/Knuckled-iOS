@@ -44,6 +44,8 @@
 		8EB776D875025D2E852601EC /* BluetoothConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF5013E606C5DFF8D582E86 /* BluetoothConnector.swift */; };
 		313B485F8536561CA3ACABC9 /* ConnectionSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7647D3C5BD158279416FFAA /* ConnectionSession.swift */; };
 		FAAFBEB4FDF75B96BBF4B152 /* ConnectionSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E36207F8E4F5C2B92E8BC30 /* ConnectionSessionTests.swift */; };
+		465FD1EF91935F758756E763 /* ConnectionScreens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1719595BF45A5A5391659887 /* ConnectionScreens.swift */; };
+		115F0E7B58625F5E9065DE0E /* ConnectionFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77F6ADC0A5F571A87DA2481 /* ConnectionFlowTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,6 +88,8 @@
 		EEF5013E606C5DFF8D582E86 /* BluetoothConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connect/BluetoothConnector.swift; sourceTree = "<group>"; };
 		F7647D3C5BD158279416FFAA /* ConnectionSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connect/ConnectionSession.swift; sourceTree = "<group>"; };
 		4E36207F8E4F5C2B92E8BC30 /* ConnectionSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionSessionTests.swift; sourceTree = "<group>"; };
+		1719595BF45A5A5391659887 /* ConnectionScreens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connect/ConnectionScreens.swift; sourceTree = "<group>"; };
+		A77F6ADC0A5F571A87DA2481 /* ConnectionFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionFlowTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +150,7 @@
 				3F50B0D4C79F5742896CC497 /* DiceSceneView.swift */,
 				EEF5013E606C5DFF8D582E86 /* BluetoothConnector.swift */,
 				F7647D3C5BD158279416FFAA /* ConnectionSession.swift */,
+				1719595BF45A5A5391659887 /* ConnectionScreens.swift */,
 			);
 			path = Knuckled;
 			sourceTree = "<group>";
@@ -167,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				410000000000000000000012 /* SoloSmokeTests.swift */,
+				A77F6ADC0A5F571A87DA2481 /* ConnectionFlowTests.swift */,
 			);
 			path = KnuckledUITests;
 			sourceTree = "<group>";
@@ -348,6 +354,7 @@
 				EFC636925EBF5AD181AB33F8 /* DiceSceneView.swift in Sources */,
 				8EB776D875025D2E852601EC /* BluetoothConnector.swift in Sources */,
 				313B485F8536561CA3ACABC9 /* ConnectionSession.swift in Sources */,
+				465FD1EF91935F758756E763 /* ConnectionScreens.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,6 +376,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				420000000000000000000012 /* SoloSmokeTests.swift in Sources */,
+				115F0E7B58625F5E9065DE0E /* ConnectionFlowTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
