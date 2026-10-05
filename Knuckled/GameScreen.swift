@@ -10,6 +10,7 @@ struct TurnPill: View {
         Group {
             if state.status == .IN_PROGRESS {
                 Text(state.phase == .ROLLING ? "Rolling…" : state.currentTurn == myId ? "Your turn" : "\(peerName)'s turn")
+                    .foregroundStyle(AppColors.ivory)
                     .padding(.horizontal, 16)
                     .padding(.vertical, 8)
                     .background(AppColors.glassWhite)

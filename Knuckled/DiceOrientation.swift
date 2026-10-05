@@ -15,8 +15,9 @@ enum DiceOrientation {
         }
     }
 
-    /// Procedural fallback face order for SCNBox materials [+x,-x,+y,-y,+z,-z].
-    /// Chosen so the Euler table above holds: identity shows +z = 2, and every
-    /// mapped rotation lands its value on +z (opposites sum to 7).
-    static let proceduralFaces = [3, 4, 6, 1, 2, 5]
+    /// Procedural fallback face order for SCNBox materials, which are
+    /// [front, right, back, left, top, bottom] = [+z, +x, -z, -x, +y, -y]
+    /// (verified empirically: identity shows slot 0, and every mapped
+    /// rotation lands its value on +z; opposites sum to 7).
+    static let proceduralFaces = [2, 3, 5, 4, 6, 1]
 }

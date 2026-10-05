@@ -67,6 +67,7 @@ struct DiscoverView: View {
                                 .foregroundStyle(AppColors.gold)
                             VStack(alignment: .leading) {
                                 Text(device.name ?? device.address)
+                                    .foregroundStyle(AppColors.ivory)
                                 Text(device.address).font(.caption).foregroundStyle(Color(red: 0xF3/255.0, green: 0xE7/255.0, blue: 0xC3/255.0, opacity: 0.7))
                             }
                         }

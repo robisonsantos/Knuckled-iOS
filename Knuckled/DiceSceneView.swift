@@ -10,16 +10,28 @@ struct DiceSceneView: View {
     let onTap: () -> Void
 
     var body: some View {
-        Button(action: {
-            if enabled && !rolling { onTap() }
-        }) {
+        // The visible die lives OUTSIDE the Button: SwiftUI dims the content
+        // of a disabled Button (~50%), which made the die look faded whenever
+        // it wasn't tappable (incl. while rolling). The transparent overlay
+        // Button keeps the exact buttons["dice"] contract (taps, isEnabled,
+        // identifiers, labels) while the die always renders full-opacity.
+        ZStack {
             DiceSceneRepresentable(value: value, rolling: rolling)
                 .frame(width: 120, height: 120)
+                .allowsHitTesting(false)
+            Button(action: {
+                if enabled && !rolling { onTap() }
+            }) {
+                Color.clear
+                    .frame(width: 120, height: 120)
+                    .contentShape(Rectangle()) // Color.clear is not hittable without this
+            }
+            .buttonStyle(.plain)
+            .disabled(!(enabled && !rolling))
+            .accessibilityIdentifier("dice")
+            .accessibilityLabel(rolling ? "Dice rolling" : value.map { "Dice showing \($0)" } ?? "Dice tap to roll")
         }
-        .buttonStyle(.plain)
-        .disabled(!(enabled && !rolling))
-        .accessibilityIdentifier("dice")
-        .accessibilityLabel(rolling ? "Dice rolling" : value.map { "Dice showing \($0)" } ?? "Dice tap to roll")
+        .frame(width: 120, height: 120)
     }
 }
 
@@ -90,7 +102,8 @@ private struct DiceSceneRepresentable: UIViewRepresentable {
             return makeProceduralDie()
         }
 
-        /// Fallback box: 6 pip-face materials on [+x,-x,+y,-y,+z,-z].
+        /// Fallback box: 6 pip-face materials on SCNBox order
+        /// [front, right, back, left, top, bottom] = [+z,+x,-z,-x,+y,-y].
         static func makeProceduralDie() -> SCNNode? {
             var materials: [SCNMaterial] = []
             for face in DiceOrientation.proceduralFaces {

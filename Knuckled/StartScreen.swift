@@ -22,9 +22,11 @@ struct StartScreen: View {
                         HStack {
                             Text("Host on one phone, join from the other — when a 3x3 grid fills up, the highest score wins.")
                                 .font(.caption)
+                                .foregroundStyle(AppColors.ivory)
                             Spacer()
                             Button(action: { settings.onboardingSeen = true }) {
                                 Image(systemName: "xmark")
+                                    .foregroundStyle(AppColors.ivory)
                             }
                             .accessibilityIdentifier("hint-dismiss")
                         }
