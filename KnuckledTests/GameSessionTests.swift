@@ -111,4 +111,61 @@ final class GameSessionTests: XCTestCase {
         XCTAssertEqual(s.grid[.CLIENT]![0], [])
         XCTAssertEqual(s.destroyed, [DieRef(player: .CLIENT, column: 0, value: 5)])
     }
+
+    func testClientReceivesHostStates() throws {
+        let (clientLink, hostLink) = InMemoryLinkPair.make()
+        let host = GameHost(link: hostLink, hostName: "Host", rollValue: { 3 }, rollDelayMs: 0, firstPlayer: { .HOST })
+        host.connect()
+
+        let session = GameSession()
+        session.connect(link: clientLink, myId: .CLIENT, hostName: "Host", clientName: "Club")
+        try waitFor(session.state != nil, timeout: 10)
+        let s = session.state!
+        XCTAssertEqual(s.hostName, "Host")
+        XCTAssertEqual(s.clientName, "Club")
+        XCTAssertEqual(s.currentTurn, .HOST)
+    }
+
+    func testClientRollAndPlaceRoundTrip() throws {
+        let (clientLink, hostLink) = InMemoryLinkPair.make()
+        let host = GameHost(link: hostLink, hostName: "Host", rollValue: { 3 }, rollDelayMs: 0, firstPlayer: { .HOST })
+        host.connect()
+
+        let session = GameSession()
+        session.connect(link: clientLink, myId: .CLIENT, hostName: "Host", clientName: "Club")
+        try waitFor(session.state != nil, timeout: 10)
+        // Host (test thread) moves first.
+        host.hostRoll()
+        try waitFor(session.state!.phase == .AWAITING_PLACEMENT, timeout: 10)
+        host.hostPlace(0)
+        // Client turn: roll via session, place via session.
+        try waitFor(session.state!.currentTurn == .CLIENT, timeout: 10)
+        session.roll()
+        try waitFor(session.state!.phase == .AWAITING_PLACEMENT && session.state!.currentTurn == .CLIENT, timeout: 10)
+        XCTAssertEqual(session.state!.lastRoll, 3)
+        session.place(1)
+        try waitFor(session.state!.currentTurn == .HOST, timeout: 10)
+        XCTAssertEqual(session.state!.grid[.CLIENT]![1], [3])
+    }
+
+    func testClientRestartAndPeerClose() throws {
+        let (clientLink, hostLink) = InMemoryLinkPair.make()
+        let host = GameHost(link: hostLink, hostName: "Host", rollValue: { 3 }, rollDelayMs: 0, firstPlayer: { .HOST })
+        host.connect()
+        var peerGone = false
+        let session = GameSession()
+        session.onPeerDisconnected = { peerGone = true }
+        session.connect(link: clientLink, myId: .CLIENT, hostName: "Host", clientName: "Club")
+        try waitFor(session.state != nil, timeout: 10)
+        host.hostRoll()
+        host.hostPlace(0)
+        try waitFor(session.state!.currentTurn == .CLIENT, timeout: 10)
+        // Client-initiated restart is illegal mid-game (host ignores it).
+        session.playAgain()
+        XCTAssertEqual(session.state!.status, .IN_PROGRESS)
+        // Peer closing the link surfaces peerDisconnected + callback.
+        hostLink.close()
+        try waitFor(session.peerDisconnected, timeout: 10)
+        XCTAssertTrue(peerGone)
+    }
 }
