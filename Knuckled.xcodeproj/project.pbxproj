@@ -32,6 +32,7 @@
 		72FB4062D0D5501A96CB81C0 /* SoundManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF3CEA8A0F5577DA2B41A02 /* SoundManagerTests.swift */; };
 		A4F23A4BDE2E5854B15CCD2E /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95FA831DD9B50F59965578F /* SoundManager.swift */; };
 		94120BB8B4CE5246B21A8F2F /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6D4118AA6D5071BF99C9BF /* Haptics.swift */; };
+		35D667940E755E579A2FAE63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8756D2348BE5690823AC6E4 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		BDF3CEA8A0F5577DA2B41A02 /* SoundManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManagerTests.swift; sourceTree = "<group>"; };
 		F95FA831DD9B50F59965578F /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		7C6D4118AA6D5071BF99C9BF /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
+		A8756D2348BE5690823AC6E4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				74D4FAEF281B52B4AB03E6A1 /* SettingsStore.swift */,
 				F95FA831DD9B50F59965578F /* SoundManager.swift */,
 				7C6D4118AA6D5071BF99C9BF /* Haptics.swift */,
+				A8756D2348BE5690823AC6E4 /* Assets.xcassets */,
 			);
 			path = Knuckled;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 				1B605595B23F5461A3127CEE /* rattle.wav in Resources */,
 				CE63230939A052EDBDE80A3A /* tap.wav in Resources */,
 				AEDD0D7C6B6A5928B71F57BC /* win.wav in Resources */,
+				35D667940E755E579A2FAE63 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +415,7 @@
 		310000000000000000000003 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -433,6 +438,7 @@
 		310000000000000000000004 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
