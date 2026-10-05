@@ -22,6 +22,8 @@
 		420000000000000000000013 /* KnuckledCore in Frameworks */ = {isa = PBXBuildFile; productRef = 450000000000000000000002 /* KnuckledCore */; };
 		420000000000000000000014 /* KnuckledCore in Frameworks */ = {isa = PBXBuildFile; productRef = 450000000000000000000002 /* KnuckledCore */; };
 		B3D3BA711BA55DC794063E76 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 2B7B52F312825ADD8AB2AEF8 /* PrivacyInfo.xcprivacy */; };
+		8145EA50163759D794C2A6D7 /* SettingsStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A8EE6675C6B5F4D9B209DF6 /* SettingsStoreTests.swift */; };
+		E972CDB306015AEB950F5372 /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D4FAEF281B52B4AB03E6A1 /* SettingsStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		410000000000000000000015 /* KnuckledTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KnuckledTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		410000000000000000000016 /* KnuckledUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KnuckledUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B7B52F312825ADD8AB2AEF8 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		9A8EE6675C6B5F4D9B209DF6 /* SettingsStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStoreTests.swift; sourceTree = "<group>"; };
+		74D4FAEF281B52B4AB03E6A1 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +99,7 @@
 				410000000000000000000013 /* Info.plist */,
 				400000000000000000000006 /* Resources */,
 				2B7B52F312825ADD8AB2AEF8 /* PrivacyInfo.xcprivacy */,
+				74D4FAEF281B52B4AB03E6A1 /* SettingsStore.swift */,
 			);
 			path = Knuckled;
 			sourceTree = "<group>";
@@ -104,6 +109,7 @@
 			children = (
 				410000000000000000000010 /* GameSessionTests.swift */,
 				410000000000000000000011 /* ColumnDisplayTests.swift */,
+				9A8EE6675C6B5F4D9B209DF6 /* SettingsStoreTests.swift */,
 			);
 			path = KnuckledTests;
 			sourceTree = "<group>";
@@ -264,6 +270,7 @@
 				420000000000000000000006 /* BoardViews.swift in Sources */,
 				420000000000000000000007 /* DieView.swift in Sources */,
 				420000000000000000000008 /* ResultOverlays.swift in Sources */,
+				E972CDB306015AEB950F5372 /* SettingsStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +280,7 @@
 			files = (
 				420000000000000000000010 /* GameSessionTests.swift in Sources */,
 				420000000000000000000011 /* ColumnDisplayTests.swift in Sources */,
+				8145EA50163759D794C2A6D7 /* SettingsStoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
