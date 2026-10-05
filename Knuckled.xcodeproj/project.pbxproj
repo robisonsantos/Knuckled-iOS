@@ -24,6 +24,13 @@
 		B3D3BA711BA55DC794063E76 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 2B7B52F312825ADD8AB2AEF8 /* PrivacyInfo.xcprivacy */; };
 		8145EA50163759D794C2A6D7 /* SettingsStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A8EE6675C6B5F4D9B209DF6 /* SettingsStoreTests.swift */; };
 		E972CDB306015AEB950F5372 /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D4FAEF281B52B4AB03E6A1 /* SettingsStore.swift */; };
+		D1D8C1B944185A568579DD0C /* land.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0B55777F263C5AF98EB88BC7 /* land.wav */; };
+		6625F8B1AFD158B69E23117D /* lose.wav in Resources */ = {isa = PBXBuildFile; fileRef = E6DA16D5539157DD944E8092 /* lose.wav */; };
+		1B605595B23F5461A3127CEE /* rattle.wav in Resources */ = {isa = PBXBuildFile; fileRef = 188661DB0B9257298F84FD79 /* rattle.wav */; };
+		CE63230939A052EDBDE80A3A /* tap.wav in Resources */ = {isa = PBXBuildFile; fileRef = F7E3D3C4C6C55A7C8D62B179 /* tap.wav */; };
+		AEDD0D7C6B6A5928B71F57BC /* win.wav in Resources */ = {isa = PBXBuildFile; fileRef = F1007476B66B5B4E883CC7A9 /* win.wav */; };
+		72FB4062D0D5501A96CB81C0 /* SoundManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF3CEA8A0F5577DA2B41A02 /* SoundManagerTests.swift */; };
+		A4F23A4BDE2E5854B15CCD2E /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95FA831DD9B50F59965578F /* SoundManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +53,13 @@
 		2B7B52F312825ADD8AB2AEF8 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		9A8EE6675C6B5F4D9B209DF6 /* SettingsStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStoreTests.swift; sourceTree = "<group>"; };
 		74D4FAEF281B52B4AB03E6A1 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
+		0B55777F263C5AF98EB88BC7 /* land.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Sounds/land.wav; sourceTree = "<group>"; };
+		E6DA16D5539157DD944E8092 /* lose.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Sounds/lose.wav; sourceTree = "<group>"; };
+		188661DB0B9257298F84FD79 /* rattle.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Sounds/rattle.wav; sourceTree = "<group>"; };
+		F7E3D3C4C6C55A7C8D62B179 /* tap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Sounds/tap.wav; sourceTree = "<group>"; };
+		F1007476B66B5B4E883CC7A9 /* win.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Sounds/win.wav; sourceTree = "<group>"; };
+		BDF3CEA8A0F5577DA2B41A02 /* SoundManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManagerTests.swift; sourceTree = "<group>"; };
+		F95FA831DD9B50F59965578F /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +114,7 @@
 				400000000000000000000006 /* Resources */,
 				2B7B52F312825ADD8AB2AEF8 /* PrivacyInfo.xcprivacy */,
 				74D4FAEF281B52B4AB03E6A1 /* SettingsStore.swift */,
+				F95FA831DD9B50F59965578F /* SoundManager.swift */,
 			);
 			path = Knuckled;
 			sourceTree = "<group>";
@@ -110,6 +125,7 @@
 				410000000000000000000010 /* GameSessionTests.swift */,
 				410000000000000000000011 /* ColumnDisplayTests.swift */,
 				9A8EE6675C6B5F4D9B209DF6 /* SettingsStoreTests.swift */,
+				BDF3CEA8A0F5577DA2B41A02 /* SoundManagerTests.swift */,
 			);
 			path = KnuckledTests;
 			sourceTree = "<group>";
@@ -136,6 +152,11 @@
 			isa = PBXGroup;
 			children = (
 				410000000000000000000009 /* CinzelBold.ttf */,
+				0B55777F263C5AF98EB88BC7 /* land.wav */,
+				E6DA16D5539157DD944E8092 /* lose.wav */,
+				188661DB0B9257298F84FD79 /* rattle.wav */,
+				F7E3D3C4C6C55A7C8D62B179 /* tap.wav */,
+				F1007476B66B5B4E883CC7A9 /* win.wav */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -252,6 +273,11 @@
 			files = (
 				420000000000000000000009 /* CinzelBold.ttf in Resources */,
 				B3D3BA711BA55DC794063E76 /* PrivacyInfo.xcprivacy in Resources */,
+				D1D8C1B944185A568579DD0C /* land.wav in Resources */,
+				6625F8B1AFD158B69E23117D /* lose.wav in Resources */,
+				1B605595B23F5461A3127CEE /* rattle.wav in Resources */,
+				CE63230939A052EDBDE80A3A /* tap.wav in Resources */,
+				AEDD0D7C6B6A5928B71F57BC /* win.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +297,7 @@
 				420000000000000000000007 /* DieView.swift in Sources */,
 				420000000000000000000008 /* ResultOverlays.swift in Sources */,
 				E972CDB306015AEB950F5372 /* SettingsStore.swift in Sources */,
+				A4F23A4BDE2E5854B15CCD2E /* SoundManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +308,7 @@
 				420000000000000000000010 /* GameSessionTests.swift in Sources */,
 				420000000000000000000011 /* ColumnDisplayTests.swift in Sources */,
 				8145EA50163759D794C2A6D7 /* SettingsStoreTests.swift in Sources */,
+				72FB4062D0D5501A96CB81C0 /* SoundManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

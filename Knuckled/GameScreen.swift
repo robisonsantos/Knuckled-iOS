@@ -23,6 +23,7 @@ struct TurnPill: View {
 
 struct GameScreen: View {
     @ObservedObject var session: GameSession
+    @Environment(\.soundManager) private var sound
     @State private var showLeaveConfirm = false
     @State private var resultArmed = false
 
@@ -48,7 +49,7 @@ struct GameScreen: View {
                             value: s.lastRoll,
                             rolling: s.phase == .ROLLING,
                             enabled: session.canRoll,
-                            onTap: { session.roll() }
+                            onTap: { sound.play(.tap); session.roll() }
                         )
                         if s.phase == .AWAITING_PLACEMENT && s.currentTurn == session.myId {
                             Text("Tap a column to place the die")
@@ -92,6 +93,14 @@ struct GameScreen: View {
                 try? await Task.sleep(for: .milliseconds(1200))
                 if session.state?.status == status { resultArmed = true }
             }
+        }
+        .task(id: session.state?.phase) {
+            guard session.state?.phase == .ROLLING else {
+                sound.stopLoop()
+                if session.state?.phase == .AWAITING_PLACEMENT { sound.play(.land) }
+                return
+            }
+            sound.startLoop(.rattle)
         }
     }
 

@@ -6,6 +6,7 @@ struct WinnerOverlay: View {
     let myId: PlayerId
     let onPlayAgain: () -> Void
     let onLeave: () -> Void
+    @Environment(\.soundManager) private var sound
 
     var body: some View {
         let winner = state.winner!
@@ -35,6 +36,7 @@ struct WinnerOverlay: View {
             .padding(24)
         }
         .accessibilityIdentifier("winner-overlay")
+        .task { sound.play(isWinner ? .win : .lose) }
     }
 }
 
