@@ -30,8 +30,10 @@ struct WinnerOverlay: View {
                 }
                 Button("Play again", action: onPlayAgain)
                     .buttonStyle(GoldButtonStyle())
+                    .accessibilityIdentifier("play-again")
                 Button("Disconnect", action: onLeave)
                     .buttonStyle(GoldSecondaryButtonStyle())
+                    .accessibilityIdentifier("disconnect")
             }
             .padding(24)
         }
@@ -61,8 +63,10 @@ struct DrawOverlay: View {
                     .foregroundStyle(AppColors.gold)
                 Button("Play again", action: onPlayAgain)
                     .buttonStyle(GoldButtonStyle())
+                    .accessibilityIdentifier("play-again")
                 Button("Disconnect", action: onLeave)
                     .buttonStyle(GoldSecondaryButtonStyle())
+                    .accessibilityIdentifier("disconnect")
             }
             .padding(24)
         }

@@ -31,6 +31,7 @@
 		AEDD0D7C6B6A5928B71F57BC /* win.wav in Resources */ = {isa = PBXBuildFile; fileRef = F1007476B66B5B4E883CC7A9 /* win.wav */; };
 		72FB4062D0D5501A96CB81C0 /* SoundManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF3CEA8A0F5577DA2B41A02 /* SoundManagerTests.swift */; };
 		A4F23A4BDE2E5854B15CCD2E /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95FA831DD9B50F59965578F /* SoundManager.swift */; };
+		94120BB8B4CE5246B21A8F2F /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6D4118AA6D5071BF99C9BF /* Haptics.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		F1007476B66B5B4E883CC7A9 /* win.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Sounds/win.wav; sourceTree = "<group>"; };
 		BDF3CEA8A0F5577DA2B41A02 /* SoundManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManagerTests.swift; sourceTree = "<group>"; };
 		F95FA831DD9B50F59965578F /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		7C6D4118AA6D5071BF99C9BF /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 				2B7B52F312825ADD8AB2AEF8 /* PrivacyInfo.xcprivacy */,
 				74D4FAEF281B52B4AB03E6A1 /* SettingsStore.swift */,
 				F95FA831DD9B50F59965578F /* SoundManager.swift */,
+				7C6D4118AA6D5071BF99C9BF /* Haptics.swift */,
 			);
 			path = Knuckled;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				420000000000000000000008 /* ResultOverlays.swift in Sources */,
 				E972CDB306015AEB950F5372 /* SettingsStore.swift in Sources */,
 				A4F23A4BDE2E5854B15CCD2E /* SoundManager.swift in Sources */,
+				94120BB8B4CE5246B21A8F2F /* Haptics.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

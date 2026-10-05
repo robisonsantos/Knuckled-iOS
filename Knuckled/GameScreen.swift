@@ -24,6 +24,7 @@ struct TurnPill: View {
 struct GameScreen: View {
     @ObservedObject var session: GameSession
     @Environment(\.soundManager) private var sound
+    @EnvironmentObject private var settings: SettingsStore
     @State private var showLeaveConfirm = false
     @State private var resultArmed = false
 
@@ -102,6 +103,19 @@ struct GameScreen: View {
             }
             sound.startLoop(.rattle)
         }
+        .task(id: session.state) {
+            guard settings.autoRoll,
+                  let s = session.state,
+                  s.status == .IN_PROGRESS, s.phase == .IDLE, s.currentTurn == session.myId,
+                  s.grid.values.contains(where: { $0.contains(where: { !$0.isEmpty }) })
+            else { return }
+            session.roll()
+        }
+        .onChange(of: session.state?.currentTurn) { _, newTurn in
+            if session.state?.status == .IN_PROGRESS, newTurn == session.myId {
+                Haptics.turn()
+            }
+        }
     }
 
     private func showResult(for s: GameState) -> Bool {
@@ -113,6 +127,20 @@ struct GameScreen: View {
             Button("Leave") { showLeaveConfirm = true }
                 .accessibilityIdentifier("leave")
             Spacer()
+            Button(action: { settings.autoRoll.toggle() }) {
+                Image(systemName: "dice")
+                    .foregroundStyle(settings.autoRoll ? AppColors.gold : Color(red: 0xF3 / 255.0, green: 0xE7 / 255.0, blue: 0xC3 / 255.0, opacity: 0.5))
+            }
+            .accessibilityIdentifier("auto-roll")
+            .accessibilityLabel(settings.autoRoll ? "Auto-roll on" : "Auto-roll off")
+            Button(action: {
+                sound.setMuted(!sound.isMuted)
+                settings.muted = sound.isMuted
+            }) {
+                Image(systemName: sound.isMuted ? "speaker.slash.fill" : "speaker.wave.2.fill")
+                    .foregroundStyle(AppColors.gold)
+            }
+            .accessibilityIdentifier("mute")
         }
         .padding(.horizontal, 8)
     }
