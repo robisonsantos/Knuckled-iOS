@@ -46,6 +46,9 @@
 		FAAFBEB4FDF75B96BBF4B152 /* ConnectionSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E36207F8E4F5C2B92E8BC30 /* ConnectionSessionTests.swift */; };
 		465FD1EF91935F758756E763 /* ConnectionScreens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1719595BF45A5A5391659887 /* ConnectionScreens.swift */; };
 		115F0E7B58625F5E9065DE0E /* ConnectionFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77F6ADC0A5F571A87DA2481 /* ConnectionFlowTests.swift */; };
+		9E16FC547D5653A7B2DA21B4 /* BleFramingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5698DC5A7D956FA8C9FCB14 /* BleFramingTests.swift */; };
+		D98D70B04690582C826D3B0F /* BleFraming.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D4123ED2265C548F786E06 /* BleFraming.swift */; };
+		FC464D6CAD7A574CABD39BA4 /* BleUUIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7F922E2BAA5FB6B32D964D /* BleUUIDs.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +93,9 @@
 		4E36207F8E4F5C2B92E8BC30 /* ConnectionSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionSessionTests.swift; sourceTree = "<group>"; };
 		1719595BF45A5A5391659887 /* ConnectionScreens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connect/ConnectionScreens.swift; sourceTree = "<group>"; };
 		A77F6ADC0A5F571A87DA2481 /* ConnectionFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionFlowTests.swift; sourceTree = "<group>"; };
+		C5698DC5A7D956FA8C9FCB14 /* BleFramingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleFramingTests.swift; sourceTree = "<group>"; };
+		E7D4123ED2265C548F786E06 /* BleFraming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLE/BleFraming.swift; sourceTree = "<group>"; };
+		7A7F922E2BAA5FB6B32D964D /* BleUUIDs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLE/BleUUIDs.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +157,8 @@
 				EEF5013E606C5DFF8D582E86 /* BluetoothConnector.swift */,
 				F7647D3C5BD158279416FFAA /* ConnectionSession.swift */,
 				1719595BF45A5A5391659887 /* ConnectionScreens.swift */,
+				E7D4123ED2265C548F786E06 /* BleFraming.swift */,
+				7A7F922E2BAA5FB6B32D964D /* BleUUIDs.swift */,
 			);
 			path = Knuckled;
 			sourceTree = "<group>";
@@ -164,6 +172,7 @@
 				BDF3CEA8A0F5577DA2B41A02 /* SoundManagerTests.swift */,
 				690DAD2C05265740A2341D58 /* DiceOrientationTests.swift */,
 				4E36207F8E4F5C2B92E8BC30 /* ConnectionSessionTests.swift */,
+				C5698DC5A7D956FA8C9FCB14 /* BleFramingTests.swift */,
 			);
 			path = KnuckledTests;
 			sourceTree = "<group>";
@@ -355,6 +364,8 @@
 				8EB776D875025D2E852601EC /* BluetoothConnector.swift in Sources */,
 				313B485F8536561CA3ACABC9 /* ConnectionSession.swift in Sources */,
 				465FD1EF91935F758756E763 /* ConnectionScreens.swift in Sources */,
+				D98D70B04690582C826D3B0F /* BleFraming.swift in Sources */,
+				FC464D6CAD7A574CABD39BA4 /* BleUUIDs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,6 +379,7 @@
 				72FB4062D0D5501A96CB81C0 /* SoundManagerTests.swift in Sources */,
 				A51BF73D8BA85AB4AE5ADF51 /* DiceOrientationTests.swift in Sources */,
 				FAAFBEB4FDF75B96BBF4B152 /* ConnectionSessionTests.swift in Sources */,
+				9E16FC547D5653A7B2DA21B4 /* BleFramingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
