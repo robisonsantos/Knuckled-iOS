@@ -55,6 +55,11 @@ public final class AVFoundationSoundManager: SoundManager {
     public init(bundle: Bundle = .main, muted: Bool, onMutedChanged: @escaping (Bool) -> Void = { _ in }) {
         self.isMuted = muted
         self.onMutedChanged = onMutedChanged
+        // Games must stay audible with the silent switch on (Android parity:
+        // SoundPool USAGE_GAME ignores ringer mode). The default soloAmbient
+        // session is silenced instead — which meant no sound at all on device.
+        try? AVAudioSession.sharedInstance().setCategory(.playback)
+        try? AVAudioSession.sharedInstance().setActive(true)
         let files: [(SoundEvent, String)] = [
             (.tap, "tap"), (.rattle, "rattle"), (.land, "land"), (.win, "win"), (.lose, "lose"),
         ]

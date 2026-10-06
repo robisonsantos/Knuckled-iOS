@@ -145,18 +145,25 @@ struct GameBoard: View {
     }
 }
 
-/// Transient destroy markers: appear below the column, fade out and remove
-/// after ~500ms (Android parity: ghost fade). A new destroy restarts the timer.
+/// Transient destroy markers: every destroy batch shows a full ~500ms fade
+/// (Android parity), even if the previous batch was cancelled mid-fade or the
+/// underlying data clears early. Batches render from a local snapshot.
+///
+/// Driven by onChange(initial:true), NOT .task: this view is usually empty
+/// when it first appears, and .task/.onAppear never arm on an empty Group
+/// (proven by probe: task never fired, body re-rendered fine). onChange
+/// observes values, so it fires reliably here.
 struct DestroyGhosts: View {
     let ghosts: [DieRef]
-    @State private var present = true
-    @State private var opacity = 1.0
+    @State private var showing: [DieRef]?
+    @State private var opacity = 0.0
+    @State private var generation = 0
 
     var body: some View {
         Group {
-            if present && !ghosts.isEmpty {
+            if let showing {
                 HStack(spacing: 4) {
-                    ForEach(0..<ghosts.count, id: \.self) { _ in
+                    ForEach(0..<showing.count, id: \.self) { _ in
                         ZStack {
                             RoundedRectangle(cornerRadius: 8)
                                 .fill(Color(red: 1, green: 0, blue: 0, opacity: 0.35))
@@ -168,17 +175,24 @@ struct DestroyGhosts: View {
                 .opacity(opacity)
             }
         }
-        .task(id: ghosts) {
-            guard !ghosts.isEmpty else { return }
-            present = true
+        .onChange(of: ghosts, initial: true) { _, new in
+            guard !new.isEmpty else { return }
+            generation += 1
+            let myGen = generation
+            let batch = new
+            showing = batch
             opacity = 1
-            withAnimation(.linear(duration: 0.5)) { opacity = 0 }
-            do {
-                try await Task.sleep(for: .milliseconds(500))
-            } catch {
-                return
+            // Let the full-opacity frame commit before fading: without this
+            // pause the 1→0 sets coalesce and a retriggered batch never
+            // visibly appears (proven by ghost-probe screenshots).
+            Task { @MainActor in
+                try? await Task.sleep(for: .milliseconds(30))
+                guard myGen == generation else { return }
+                withAnimation(.linear(duration: 0.5)) { opacity = 0 }
+                try? await Task.sleep(for: .milliseconds(500))
+                guard myGen == generation else { return }
+                if showing == batch { showing = nil }
             }
-            present = false
         }
     }
 }
