@@ -5,6 +5,13 @@ struct StartScreen: View {
     @EnvironmentObject private var connection: ConnectionSession
     @EnvironmentObject private var settings: SettingsStore
 
+    /// "0.9.1 (1)" from the bundle; semver lives in MARKETING_VERSION.
+    static var appVersion: String {
+        let v = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "?"
+        let b = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "?"
+        return "\(v) (\(b))"
+    }
+
     var body: some View {
         ZStack {
             FeltBackground()
@@ -67,6 +74,11 @@ struct StartScreen: View {
                         .padding(12)
                     }
                 }
+                Text("v\(StartScreen.appVersion)")
+                    .font(.caption2)
+                    .foregroundStyle(AppColors.ivory)
+                    .opacity(0.6)
+                    .accessibilityIdentifier("app-version")
             }
             .padding(24)
             }
