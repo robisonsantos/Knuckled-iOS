@@ -3,10 +3,17 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 71;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		115F0E7B58625F5E9065DE0E /* ConnectionFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77F6ADC0A5F571A87DA2481 /* ConnectionFlowTests.swift */; };
+		1772DB95A4CD55B292CB8F5D /* DiceFaces/4.png in Resources */ = {isa = PBXBuildFile; fileRef = F92C06840FE6595E85E2C6D1 /* DiceFaces/4.png */; };
+		1B605595B23F5461A3127CEE /* Sounds/rattle.wav in Resources */ = {isa = PBXBuildFile; fileRef = 188661DB0B9257298F84FD79 /* Sounds/rattle.wav */; };
+		1E14771E9B6E5C788683A322 /* BLE/BleError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA7B60C0195342B0EFE8B9 /* BLE/BleError.swift */; };
+		2A79353FA9AE535CB4F6AE39 /* BLE/BleConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BD2DD187AE5B0985B7A243 /* BLE/BleConnector.swift */; };
+		313B485F8536561CA3ACABC9 /* Connect/ConnectionSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7647D3C5BD158279416FFAA /* Connect/ConnectionSession.swift */; };
+		35D667940E755E579A2FAE63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8756D2348BE5690823AC6E4 /* Assets.xcassets */; };
 		420000000000000000000001 /* KnuckledApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410000000000000000000001 /* KnuckledApp.swift */; };
 		420000000000000000000002 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410000000000000000000002 /* Theme.swift */; };
 		420000000000000000000003 /* StartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410000000000000000000003 /* StartScreen.swift */; };
@@ -20,44 +27,62 @@
 		420000000000000000000012 /* SoloSmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410000000000000000000012 /* SoloSmokeTests.swift */; };
 		420000000000000000000013 /* KnuckledCore in Frameworks */ = {isa = PBXBuildFile; productRef = 450000000000000000000002 /* KnuckledCore */; };
 		420000000000000000000014 /* KnuckledCore in Frameworks */ = {isa = PBXBuildFile; productRef = 450000000000000000000002 /* KnuckledCore */; };
-		B3D3BA711BA55DC794063E76 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 2B7B52F312825ADD8AB2AEF8 /* PrivacyInfo.xcprivacy */; };
-		8145EA50163759D794C2A6D7 /* SettingsStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A8EE6675C6B5F4D9B209DF6 /* SettingsStoreTests.swift */; };
-		E972CDB306015AEB950F5372 /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D4FAEF281B52B4AB03E6A1 /* SettingsStore.swift */; };
-		D1D8C1B944185A568579DD0C /* land.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0B55777F263C5AF98EB88BC7 /* land.wav */; };
-		6625F8B1AFD158B69E23117D /* lose.wav in Resources */ = {isa = PBXBuildFile; fileRef = E6DA16D5539157DD944E8092 /* lose.wav */; };
-		1B605595B23F5461A3127CEE /* rattle.wav in Resources */ = {isa = PBXBuildFile; fileRef = 188661DB0B9257298F84FD79 /* rattle.wav */; };
-		CE63230939A052EDBDE80A3A /* tap.wav in Resources */ = {isa = PBXBuildFile; fileRef = F7E3D3C4C6C55A7C8D62B179 /* tap.wav */; };
-		AEDD0D7C6B6A5928B71F57BC /* win.wav in Resources */ = {isa = PBXBuildFile; fileRef = F1007476B66B5B4E883CC7A9 /* win.wav */; };
+		465FD1EF91935F758756E763 /* Connect/ConnectionScreens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1719595BF45A5A5391659887 /* Connect/ConnectionScreens.swift */; };
+		6625F8B1AFD158B69E23117D /* Sounds/lose.wav in Resources */ = {isa = PBXBuildFile; fileRef = E6DA16D5539157DD944E8092 /* Sounds/lose.wav */; };
+		72FA59A11A9F580AB9BD1D4D /* BLE/BleCentralClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B992EA51D3E65DF7A3F6A19B /* BLE/BleCentralClient.swift */; };
 		72FB4062D0D5501A96CB81C0 /* SoundManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF3CEA8A0F5577DA2B41A02 /* SoundManagerTests.swift */; };
-		A4F23A4BDE2E5854B15CCD2E /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95FA831DD9B50F59965578F /* SoundManager.swift */; };
-		94120BB8B4CE5246B21A8F2F /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6D4118AA6D5071BF99C9BF /* Haptics.swift */; };
-		35D667940E755E579A2FAE63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8756D2348BE5690823AC6E4 /* Assets.xcassets */; };
-		F2FD7923E9C45825A22429AF /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C73EBFC20405A6F9429F4AC /* 1.png */; };
-		CF6B7A4666D8543F801F2D0C /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = DBE8A70C035F586CAF710CBC /* 2.png */; };
-		BB7F12FC2785512ABA3B2234 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 7683E4CFFCA95DD7928B0F67 /* 3.png */; };
-		1772DB95A4CD55B292CB8F5D /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = F92C06840FE6595E85E2C6D1 /* 4.png */; };
-		EC6A49B87C7458B891174C4E /* 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 62E466A9C29E52839B8E29CB /* 5.png */; };
-		7DA9A536B54E5397A0BFD095 /* 6.png in Resources */ = {isa = PBXBuildFile; fileRef = 8707944AB50B5435ACCBFDF7 /* 6.png */; };
-		A51BF73D8BA85AB4AE5ADF51 /* DiceOrientationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690DAD2C05265740A2341D58 /* DiceOrientationTests.swift */; };
-		924867EF010B5B708375726C /* DiceOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4023E29E97AA573B80400711 /* DiceOrientation.swift */; };
-		EFC636925EBF5AD181AB33F8 /* DiceSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F50B0D4C79F5742896CC497 /* DiceSceneView.swift */; };
-		8EB776D875025D2E852601EC /* BluetoothConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF5013E606C5DFF8D582E86 /* BluetoothConnector.swift */; };
-		313B485F8536561CA3ACABC9 /* ConnectionSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7647D3C5BD158279416FFAA /* ConnectionSession.swift */; };
-		FAAFBEB4FDF75B96BBF4B152 /* ConnectionSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E36207F8E4F5C2B92E8BC30 /* ConnectionSessionTests.swift */; };
-		465FD1EF91935F758756E763 /* ConnectionScreens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1719595BF45A5A5391659887 /* ConnectionScreens.swift */; };
-		115F0E7B58625F5E9065DE0E /* ConnectionFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77F6ADC0A5F571A87DA2481 /* ConnectionFlowTests.swift */; };
-		9E16FC547D5653A7B2DA21B4 /* BleFramingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5698DC5A7D956FA8C9FCB14 /* BleFramingTests.swift */; };
-		D98D70B04690582C826D3B0F /* BleFraming.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D4123ED2265C548F786E06 /* BleFraming.swift */; };
-		FC464D6CAD7A574CABD39BA4 /* BleUUIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7F922E2BAA5FB6B32D964D /* BleUUIDs.swift */; };
+		7DA9A536B54E5397A0BFD095 /* DiceFaces/6.png in Resources */ = {isa = PBXBuildFile; fileRef = 8707944AB50B5435ACCBFDF7 /* DiceFaces/6.png */; };
+		8145EA50163759D794C2A6D7 /* SettingsStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A8EE6675C6B5F4D9B209DF6 /* SettingsStoreTests.swift */; };
+		83F930904A5C5810B6423ECF /* BLE/BlePipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4461B096E3D9500CBC163021 /* BLE/BlePipe.swift */; };
+		8EB776D875025D2E852601EC /* Connect/BluetoothConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF5013E606C5DFF8D582E86 /* Connect/BluetoothConnector.swift */; };
 		909692D7E5B45EEF9CFEEFA8 /* BlePipeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8071F8972CA52CEA631C5DD /* BlePipeTests.swift */; };
-		83F930904A5C5810B6423ECF /* BlePipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4461B096E3D9500CBC163021 /* BlePipe.swift */; };
-		72FA59A11A9F580AB9BD1D4D /* BleCentralClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B992EA51D3E65DF7A3F6A19B /* BleCentralClient.swift */; };
-		2A79353FA9AE535CB4F6AE39 /* BleConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BD2DD187AE5B0985B7A243 /* BleConnector.swift */; };
-		1E14771E9B6E5C788683A322 /* BleError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA7B60C0195342B0EFE8B9 /* BleError.swift */; };
-		DD4A136A85435940A301E845 /* BlePeripheralHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A26C3E85A7753C5B55786A9 /* BlePeripheralHost.swift */; };
+		924867EF010B5B708375726C /* DiceOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4023E29E97AA573B80400711 /* DiceOrientation.swift */; };
+		94120BB8B4CE5246B21A8F2F /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6D4118AA6D5071BF99C9BF /* Haptics.swift */; };
+		9E16FC547D5653A7B2DA21B4 /* BleFramingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5698DC5A7D956FA8C9FCB14 /* BleFramingTests.swift */; };
+		A4F23A4BDE2E5854B15CCD2E /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95FA831DD9B50F59965578F /* SoundManager.swift */; };
+		A51BF73D8BA85AB4AE5ADF51 /* DiceOrientationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690DAD2C05265740A2341D58 /* DiceOrientationTests.swift */; };
+		AEDD0D7C6B6A5928B71F57BC /* Sounds/win.wav in Resources */ = {isa = PBXBuildFile; fileRef = F1007476B66B5B4E883CC7A9 /* Sounds/win.wav */; };
+		B3D3BA711BA55DC794063E76 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 2B7B52F312825ADD8AB2AEF8 /* PrivacyInfo.xcprivacy */; };
+		BB7F12FC2785512ABA3B2234 /* DiceFaces/3.png in Resources */ = {isa = PBXBuildFile; fileRef = 7683E4CFFCA95DD7928B0F67 /* DiceFaces/3.png */; };
+		CE63230939A052EDBDE80A3A /* Sounds/tap.wav in Resources */ = {isa = PBXBuildFile; fileRef = F7E3D3C4C6C55A7C8D62B179 /* Sounds/tap.wav */; };
+		CF6B7A4666D8543F801F2D0C /* DiceFaces/2.png in Resources */ = {isa = PBXBuildFile; fileRef = DBE8A70C035F586CAF710CBC /* DiceFaces/2.png */; };
+		D1D8C1B944185A568579DD0C /* Sounds/land.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0B55777F263C5AF98EB88BC7 /* Sounds/land.wav */; };
+		D98D70B04690582C826D3B0F /* BLE/BleFraming.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D4123ED2265C548F786E06 /* BLE/BleFraming.swift */; };
+		DD4A136A85435940A301E845 /* BLE/BlePeripheralHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A26C3E85A7753C5B55786A9 /* BLE/BlePeripheralHost.swift */; };
+		E972CDB306015AEB950F5372 /* SettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D4FAEF281B52B4AB03E6A1 /* SettingsStore.swift */; };
+		EC6A49B87C7458B891174C4E /* DiceFaces/5.png in Resources */ = {isa = PBXBuildFile; fileRef = 62E466A9C29E52839B8E29CB /* DiceFaces/5.png */; };
+		EFC636925EBF5AD181AB33F8 /* DiceSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F50B0D4C79F5742896CC497 /* DiceSceneView.swift */; };
+		F2FD7923E9C45825A22429AF /* DiceFaces/1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3C73EBFC20405A6F9429F4AC /* DiceFaces/1.png */; };
+		FAAFBEB4FDF75B96BBF4B152 /* ConnectionSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E36207F8E4F5C2B92E8BC30 /* ConnectionSessionTests.swift */; };
+		FC464D6CAD7A574CABD39BA4 /* BLE/BleUUIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7F922E2BAA5FB6B32D964D /* BLE/BleUUIDs.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		440000000000000000000003 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 100000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 200000000000000000000001;
+			remoteInfo = Knuckled;
+		};
+		440000000000000000000004 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 100000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 200000000000000000000001;
+			remoteInfo = Knuckled;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		0B55777F263C5AF98EB88BC7 /* Sounds/land.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Sounds/land.wav; sourceTree = "<group>"; };
+		14AA7B60C0195342B0EFE8B9 /* BLE/BleError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLE/BleError.swift; sourceTree = "<group>"; };
+		1719595BF45A5A5391659887 /* Connect/ConnectionScreens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connect/ConnectionScreens.swift; sourceTree = "<group>"; };
+		188661DB0B9257298F84FD79 /* Sounds/rattle.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Sounds/rattle.wav; sourceTree = "<group>"; };
+		2B7B52F312825ADD8AB2AEF8 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		3C73EBFC20405A6F9429F4AC /* DiceFaces/1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DiceFaces/1.png; sourceTree = "<group>"; };
+		3F50B0D4C79F5742896CC497 /* DiceSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceSceneView.swift; sourceTree = "<group>"; };
+		4023E29E97AA573B80400711 /* DiceOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceOrientation.swift; sourceTree = "<group>"; };
 		410000000000000000000001 /* KnuckledApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnuckledApp.swift; sourceTree = "<group>"; };
 		410000000000000000000002 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		410000000000000000000003 /* StartScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreen.swift; sourceTree = "<group>"; };
@@ -73,41 +98,33 @@
 		410000000000000000000014 /* Knuckled.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Knuckled.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		410000000000000000000015 /* KnuckledTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KnuckledTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		410000000000000000000016 /* KnuckledUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KnuckledUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2B7B52F312825ADD8AB2AEF8 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		9A8EE6675C6B5F4D9B209DF6 /* SettingsStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStoreTests.swift; sourceTree = "<group>"; };
-		74D4FAEF281B52B4AB03E6A1 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
-		0B55777F263C5AF98EB88BC7 /* land.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Sounds/land.wav; sourceTree = "<group>"; };
-		E6DA16D5539157DD944E8092 /* lose.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Sounds/lose.wav; sourceTree = "<group>"; };
-		188661DB0B9257298F84FD79 /* rattle.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Sounds/rattle.wav; sourceTree = "<group>"; };
-		F7E3D3C4C6C55A7C8D62B179 /* tap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Sounds/tap.wav; sourceTree = "<group>"; };
-		F1007476B66B5B4E883CC7A9 /* win.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Sounds/win.wav; sourceTree = "<group>"; };
-		BDF3CEA8A0F5577DA2B41A02 /* SoundManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManagerTests.swift; sourceTree = "<group>"; };
-		F95FA831DD9B50F59965578F /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
-		7C6D4118AA6D5071BF99C9BF /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
-		A8756D2348BE5690823AC6E4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3C73EBFC20405A6F9429F4AC /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DiceFaces/1.png; sourceTree = "<group>"; };
-		DBE8A70C035F586CAF710CBC /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DiceFaces/2.png; sourceTree = "<group>"; };
-		7683E4CFFCA95DD7928B0F67 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DiceFaces/3.png; sourceTree = "<group>"; };
-		F92C06840FE6595E85E2C6D1 /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DiceFaces/4.png; sourceTree = "<group>"; };
-		62E466A9C29E52839B8E29CB /* 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DiceFaces/5.png; sourceTree = "<group>"; };
-		8707944AB50B5435ACCBFDF7 /* 6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DiceFaces/6.png; sourceTree = "<group>"; };
-		690DAD2C05265740A2341D58 /* DiceOrientationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceOrientationTests.swift; sourceTree = "<group>"; };
-		4023E29E97AA573B80400711 /* DiceOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceOrientation.swift; sourceTree = "<group>"; };
-		3F50B0D4C79F5742896CC497 /* DiceSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceSceneView.swift; sourceTree = "<group>"; };
-		EEF5013E606C5DFF8D582E86 /* BluetoothConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connect/BluetoothConnector.swift; sourceTree = "<group>"; };
-		F7647D3C5BD158279416FFAA /* ConnectionSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connect/ConnectionSession.swift; sourceTree = "<group>"; };
+		4461B096E3D9500CBC163021 /* BLE/BlePipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLE/BlePipe.swift; sourceTree = "<group>"; };
 		4E36207F8E4F5C2B92E8BC30 /* ConnectionSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionSessionTests.swift; sourceTree = "<group>"; };
-		1719595BF45A5A5391659887 /* ConnectionScreens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connect/ConnectionScreens.swift; sourceTree = "<group>"; };
+		54BD2DD187AE5B0985B7A243 /* BLE/BleConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLE/BleConnector.swift; sourceTree = "<group>"; };
+		5A26C3E85A7753C5B55786A9 /* BLE/BlePeripheralHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLE/BlePeripheralHost.swift; sourceTree = "<group>"; };
+		62E466A9C29E52839B8E29CB /* DiceFaces/5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DiceFaces/5.png; sourceTree = "<group>"; };
+		690DAD2C05265740A2341D58 /* DiceOrientationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceOrientationTests.swift; sourceTree = "<group>"; };
+		74D4FAEF281B52B4AB03E6A1 /* SettingsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStore.swift; sourceTree = "<group>"; };
+		7683E4CFFCA95DD7928B0F67 /* DiceFaces/3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DiceFaces/3.png; sourceTree = "<group>"; };
+		7A7F922E2BAA5FB6B32D964D /* BLE/BleUUIDs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLE/BleUUIDs.swift; sourceTree = "<group>"; };
+		7C6D4118AA6D5071BF99C9BF /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
+		8707944AB50B5435ACCBFDF7 /* DiceFaces/6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DiceFaces/6.png; sourceTree = "<group>"; };
+		9A8EE6675C6B5F4D9B209DF6 /* SettingsStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStoreTests.swift; sourceTree = "<group>"; };
 		A77F6ADC0A5F571A87DA2481 /* ConnectionFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionFlowTests.swift; sourceTree = "<group>"; };
+		A8756D2348BE5690823AC6E4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B992EA51D3E65DF7A3F6A19B /* BLE/BleCentralClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLE/BleCentralClient.swift; sourceTree = "<group>"; };
+		BDF3CEA8A0F5577DA2B41A02 /* SoundManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManagerTests.swift; sourceTree = "<group>"; };
 		C5698DC5A7D956FA8C9FCB14 /* BleFramingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleFramingTests.swift; sourceTree = "<group>"; };
-		E7D4123ED2265C548F786E06 /* BleFraming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLE/BleFraming.swift; sourceTree = "<group>"; };
-		7A7F922E2BAA5FB6B32D964D /* BleUUIDs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLE/BleUUIDs.swift; sourceTree = "<group>"; };
 		C8071F8972CA52CEA631C5DD /* BlePipeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlePipeTests.swift; sourceTree = "<group>"; };
-		4461B096E3D9500CBC163021 /* BlePipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLE/BlePipe.swift; sourceTree = "<group>"; };
-		B992EA51D3E65DF7A3F6A19B /* BleCentralClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLE/BleCentralClient.swift; sourceTree = "<group>"; };
-		54BD2DD187AE5B0985B7A243 /* BleConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLE/BleConnector.swift; sourceTree = "<group>"; };
-		14AA7B60C0195342B0EFE8B9 /* BleError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLE/BleError.swift; sourceTree = "<group>"; };
-		5A26C3E85A7753C5B55786A9 /* BlePeripheralHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLE/BlePeripheralHost.swift; sourceTree = "<group>"; };
+		DBE8A70C035F586CAF710CBC /* DiceFaces/2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DiceFaces/2.png; sourceTree = "<group>"; };
+		E6DA16D5539157DD944E8092 /* Sounds/lose.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Sounds/lose.wav; sourceTree = "<group>"; };
+		E7D4123ED2265C548F786E06 /* BLE/BleFraming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLE/BleFraming.swift; sourceTree = "<group>"; };
+		EEF5013E606C5DFF8D582E86 /* Connect/BluetoothConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connect/BluetoothConnector.swift; sourceTree = "<group>"; };
+		F1007476B66B5B4E883CC7A9 /* Sounds/win.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Sounds/win.wav; sourceTree = "<group>"; };
+		F7647D3C5BD158279416FFAA /* Connect/ConnectionSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connect/ConnectionSession.swift; sourceTree = "<group>"; };
+		F7E3D3C4C6C55A7C8D62B179 /* Sounds/tap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Sounds/tap.wav; sourceTree = "<group>"; };
+		F92C06840FE6595E85E2C6D1 /* DiceFaces/4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DiceFaces/4.png; sourceTree = "<group>"; };
+		F95FA831DD9B50F59965578F /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,16 +183,16 @@
 				A8756D2348BE5690823AC6E4 /* Assets.xcassets */,
 				4023E29E97AA573B80400711 /* DiceOrientation.swift */,
 				3F50B0D4C79F5742896CC497 /* DiceSceneView.swift */,
-				EEF5013E606C5DFF8D582E86 /* BluetoothConnector.swift */,
-				F7647D3C5BD158279416FFAA /* ConnectionSession.swift */,
-				1719595BF45A5A5391659887 /* ConnectionScreens.swift */,
-				E7D4123ED2265C548F786E06 /* BleFraming.swift */,
-				7A7F922E2BAA5FB6B32D964D /* BleUUIDs.swift */,
-				4461B096E3D9500CBC163021 /* BlePipe.swift */,
-				B992EA51D3E65DF7A3F6A19B /* BleCentralClient.swift */,
-				54BD2DD187AE5B0985B7A243 /* BleConnector.swift */,
-				14AA7B60C0195342B0EFE8B9 /* BleError.swift */,
-				5A26C3E85A7753C5B55786A9 /* BlePeripheralHost.swift */,
+				EEF5013E606C5DFF8D582E86 /* Connect/BluetoothConnector.swift */,
+				F7647D3C5BD158279416FFAA /* Connect/ConnectionSession.swift */,
+				1719595BF45A5A5391659887 /* Connect/ConnectionScreens.swift */,
+				E7D4123ED2265C548F786E06 /* BLE/BleFraming.swift */,
+				7A7F922E2BAA5FB6B32D964D /* BLE/BleUUIDs.swift */,
+				4461B096E3D9500CBC163021 /* BLE/BlePipe.swift */,
+				B992EA51D3E65DF7A3F6A19B /* BLE/BleCentralClient.swift */,
+				54BD2DD187AE5B0985B7A243 /* BLE/BleConnector.swift */,
+				14AA7B60C0195342B0EFE8B9 /* BLE/BleError.swift */,
+				5A26C3E85A7753C5B55786A9 /* BLE/BlePeripheralHost.swift */,
 			);
 			path = Knuckled;
 			sourceTree = "<group>";
@@ -218,17 +235,17 @@
 			isa = PBXGroup;
 			children = (
 				410000000000000000000009 /* CinzelBold.ttf */,
-				0B55777F263C5AF98EB88BC7 /* land.wav */,
-				E6DA16D5539157DD944E8092 /* lose.wav */,
-				188661DB0B9257298F84FD79 /* rattle.wav */,
-				F7E3D3C4C6C55A7C8D62B179 /* tap.wav */,
-				F1007476B66B5B4E883CC7A9 /* win.wav */,
-				3C73EBFC20405A6F9429F4AC /* 1.png */,
-				DBE8A70C035F586CAF710CBC /* 2.png */,
-				7683E4CFFCA95DD7928B0F67 /* 3.png */,
-				F92C06840FE6595E85E2C6D1 /* 4.png */,
-				62E466A9C29E52839B8E29CB /* 5.png */,
-				8707944AB50B5435ACCBFDF7 /* 6.png */,
+				0B55777F263C5AF98EB88BC7 /* Sounds/land.wav */,
+				E6DA16D5539157DD944E8092 /* Sounds/lose.wav */,
+				188661DB0B9257298F84FD79 /* Sounds/rattle.wav */,
+				F7E3D3C4C6C55A7C8D62B179 /* Sounds/tap.wav */,
+				F1007476B66B5B4E883CC7A9 /* Sounds/win.wav */,
+				3C73EBFC20405A6F9429F4AC /* DiceFaces/1.png */,
+				DBE8A70C035F586CAF710CBC /* DiceFaces/2.png */,
+				7683E4CFFCA95DD7928B0F67 /* DiceFaces/3.png */,
+				F92C06840FE6595E85E2C6D1 /* DiceFaces/4.png */,
+				62E466A9C29E52839B8E29CB /* DiceFaces/5.png */,
+				8707944AB50B5435ACCBFDF7 /* DiceFaces/6.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -302,16 +319,16 @@
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1700;
 				TargetAttributes = {
-					200000000000000000000001 /* Knuckled */ = {
+					200000000000000000000001 = {
 						CreatedOnToolsVersion = 17.0;
 					};
-					200000000000000000000002 /* KnuckledTests */ = {
+					200000000000000000000002 = {
 						CreatedOnToolsVersion = 17.0;
-						TestTargetID = 200000000000000000000001 /* Knuckled */;
+						TestTargetID = 200000000000000000000001;
 					};
-					200000000000000000000003 /* KnuckledUITests */ = {
+					200000000000000000000003 = {
 						CreatedOnToolsVersion = 17.0;
-						TestTargetID = 200000000000000000000001 /* Knuckled */;
+						TestTargetID = 200000000000000000000001;
 					};
 				};
 			};
@@ -325,7 +342,7 @@
 			);
 			mainGroup = 400000000000000000000001;
 			packageReferences = (
-				450000000000000000000001 /* XCRemoteSwiftPackageReference "KnuckledCore" */,
+				450000000000000000000001 /* XCLocalSwiftPackageReference "." */,
 			);
 			productRefGroup = 400000000000000000000005 /* Products */;
 			projectDirPath = "";
@@ -345,18 +362,18 @@
 			files = (
 				420000000000000000000009 /* CinzelBold.ttf in Resources */,
 				B3D3BA711BA55DC794063E76 /* PrivacyInfo.xcprivacy in Resources */,
-				D1D8C1B944185A568579DD0C /* land.wav in Resources */,
-				6625F8B1AFD158B69E23117D /* lose.wav in Resources */,
-				1B605595B23F5461A3127CEE /* rattle.wav in Resources */,
-				CE63230939A052EDBDE80A3A /* tap.wav in Resources */,
-				AEDD0D7C6B6A5928B71F57BC /* win.wav in Resources */,
+				D1D8C1B944185A568579DD0C /* Sounds/land.wav in Resources */,
+				6625F8B1AFD158B69E23117D /* Sounds/lose.wav in Resources */,
+				1B605595B23F5461A3127CEE /* Sounds/rattle.wav in Resources */,
+				CE63230939A052EDBDE80A3A /* Sounds/tap.wav in Resources */,
+				AEDD0D7C6B6A5928B71F57BC /* Sounds/win.wav in Resources */,
 				35D667940E755E579A2FAE63 /* Assets.xcassets in Resources */,
-				F2FD7923E9C45825A22429AF /* 1.png in Resources */,
-				CF6B7A4666D8543F801F2D0C /* 2.png in Resources */,
-				BB7F12FC2785512ABA3B2234 /* 3.png in Resources */,
-				1772DB95A4CD55B292CB8F5D /* 4.png in Resources */,
-				EC6A49B87C7458B891174C4E /* 5.png in Resources */,
-				7DA9A536B54E5397A0BFD095 /* 6.png in Resources */,
+				F2FD7923E9C45825A22429AF /* DiceFaces/1.png in Resources */,
+				CF6B7A4666D8543F801F2D0C /* DiceFaces/2.png in Resources */,
+				BB7F12FC2785512ABA3B2234 /* DiceFaces/3.png in Resources */,
+				1772DB95A4CD55B292CB8F5D /* DiceFaces/4.png in Resources */,
+				EC6A49B87C7458B891174C4E /* DiceFaces/5.png in Resources */,
+				7DA9A536B54E5397A0BFD095 /* DiceFaces/6.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,16 +396,16 @@
 				94120BB8B4CE5246B21A8F2F /* Haptics.swift in Sources */,
 				924867EF010B5B708375726C /* DiceOrientation.swift in Sources */,
 				EFC636925EBF5AD181AB33F8 /* DiceSceneView.swift in Sources */,
-				8EB776D875025D2E852601EC /* BluetoothConnector.swift in Sources */,
-				313B485F8536561CA3ACABC9 /* ConnectionSession.swift in Sources */,
-				465FD1EF91935F758756E763 /* ConnectionScreens.swift in Sources */,
-				D98D70B04690582C826D3B0F /* BleFraming.swift in Sources */,
-				FC464D6CAD7A574CABD39BA4 /* BleUUIDs.swift in Sources */,
-				83F930904A5C5810B6423ECF /* BlePipe.swift in Sources */,
-				72FA59A11A9F580AB9BD1D4D /* BleCentralClient.swift in Sources */,
-				2A79353FA9AE535CB4F6AE39 /* BleConnector.swift in Sources */,
-				1E14771E9B6E5C788683A322 /* BleError.swift in Sources */,
-				DD4A136A85435940A301E845 /* BlePeripheralHost.swift in Sources */,
+				8EB776D875025D2E852601EC /* Connect/BluetoothConnector.swift in Sources */,
+				313B485F8536561CA3ACABC9 /* Connect/ConnectionSession.swift in Sources */,
+				465FD1EF91935F758756E763 /* Connect/ConnectionScreens.swift in Sources */,
+				D98D70B04690582C826D3B0F /* BLE/BleFraming.swift in Sources */,
+				FC464D6CAD7A574CABD39BA4 /* BLE/BleUUIDs.swift in Sources */,
+				83F930904A5C5810B6423ECF /* BLE/BlePipe.swift in Sources */,
+				72FA59A11A9F580AB9BD1D4D /* BLE/BleCentralClient.swift in Sources */,
+				2A79353FA9AE535CB4F6AE39 /* BLE/BleConnector.swift in Sources */,
+				1E14771E9B6E5C788683A322 /* BLE/BleError.swift in Sources */,
+				DD4A136A85435940A301E845 /* BLE/BlePeripheralHost.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,20 +445,6 @@
 			isa = PBXTargetDependency;
 			target = 200000000000000000000001 /* Knuckled */;
 			targetProxy = 440000000000000000000004 /* PBXContainerItemProxy */;
-		};
-		440000000000000000000003 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 100000000000000000000001 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 200000000000000000000001;
-			remoteInfo = Knuckled;
-		};
-		440000000000000000000004 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 100000000000000000000001 /* Project object */;
-			proxyType = 1;
-			remoteInfo = Knuckled;
-			remoteGlobalIDString = 200000000000000000000001;
 		};
 /* End PBXTargetDependency section */
 
@@ -507,6 +510,7 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 54G8H589SM;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Knuckled/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -530,6 +534,7 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 54G8H589SM;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Knuckled/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -658,7 +663,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		450000000000000000000001 /* XCRemoteSwiftPackageReference "KnuckledCore" */ = {
+		450000000000000000000001 /* XCLocalSwiftPackageReference "." */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = .;
 		};
@@ -667,11 +672,10 @@
 /* Begin XCSwiftPackageProductDependency section */
 		450000000000000000000002 /* KnuckledCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 450000000000000000000001 /* XCRemoteSwiftPackageReference "KnuckledCore" */;
+			package = 450000000000000000000001 /* XCLocalSwiftPackageReference "." */;
 			productName = KnuckledCore;
 		};
 /* End XCSwiftPackageProductDependency section */
-
 	};
 	rootObject = 100000000000000000000001 /* Project object */;
 }
