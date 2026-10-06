@@ -36,9 +36,65 @@ struct WinnerOverlay: View {
                     .accessibilityIdentifier("disconnect")
             }
             .padding(24)
+            if isWinner {
+                WinConfetti()
+            }
         }
         .accessibilityIdentifier("winner-overlay")
         .task { sound.play(isWinner ? .win : .lose) }
+    }
+}
+
+/// Lightweight win-only confetti burst (~50 gold/ivory/red rectangles
+/// falling with animation). Static when Reduce Motion is on.
+private struct WinConfetti: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @State private var falling = false
+    private let pieces: [ConfettiPiece] = (0..<50).map { _ in ConfettiPiece.random() }
+
+    var body: some View {
+        ZStack {
+            ForEach(pieces) { piece in
+                Rectangle()
+                    .fill(piece.color)
+                    .frame(width: piece.w, height: piece.h)
+                    .offset(x: piece.x, y: reduceMotion ? piece.staticY : (falling ? piece.endY : piece.startY))
+                    .rotationEffect(.degrees(reduceMotion ? piece.rotation : (falling ? piece.rotation + 360 : piece.rotation)))
+                    .opacity(reduceMotion ? 0.9 : (falling ? 0.0 : 1.0))
+            }
+        }
+        .allowsHitTesting(false)
+        .accessibilityHidden(true)
+        .onAppear {
+            guard !reduceMotion else { return }
+            withAnimation(.linear(duration: 2.5)) { falling = true }
+        }
+    }
+}
+
+private struct ConfettiPiece: Identifiable {
+    let id = UUID()
+    let x: CGFloat
+    let startY: CGFloat
+    let endY: CGFloat
+    let staticY: CGFloat
+    let color: Color
+    let w: CGFloat
+    let h: CGFloat
+    let rotation: Double
+
+    static func random() -> ConfettiPiece {
+        let colors: [Color] = [AppColors.gold, AppColors.ivory, AppColors.error]
+        return ConfettiPiece(
+            x: CGFloat.random(in: -160...160),
+            startY: CGFloat.random(in: -340...(-240)),
+            endY: CGFloat.random(in: 240...420),
+            staticY: CGFloat.random(in: -260...(-120)),
+            color: colors.randomElement()!,
+            w: CGFloat.random(in: 6...10),
+            h: CGFloat.random(in: 8...14),
+            rotation: Double.random(in: 0...360)
+        )
     }
 }
 

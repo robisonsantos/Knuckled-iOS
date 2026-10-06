@@ -17,8 +17,16 @@ final class ConnectionFlowTests: XCTestCase {
         field.typeText(name)
     }
 
+    private func openPvP(_ app: XCUIApplication) {
+        let pvp = app.buttons["pvp-button"]
+        XCTAssertTrue(pvp.waitForExistence(timeout: 5))
+        pvp.tap()
+        XCTAssertTrue(app.buttons["host-button"].waitForExistence(timeout: 5))
+    }
+
     func testHostFlowShowsPinThenGame() {
         let app = launch()
+        openPvP(app)
         typeName(app)
         app.buttons["host-button"].tap()
         XCTAssertTrue(app.staticTexts["pin-display"].waitForExistence(timeout: 10))
@@ -28,6 +36,7 @@ final class ConnectionFlowTests: XCTestCase {
 
     func testJoinFlowWrongPinShowsError() {
         let app = launch()
+        openPvP(app)
         typeName(app)
         app.buttons["join-button"].tap()
         // Fake discover returns instantly so scan-status flashes past;
@@ -48,6 +57,7 @@ final class ConnectionFlowTests: XCTestCase {
 
     func testJoinFlowCorrectPinReachesGame() {
         let app = launch()
+        openPvP(app)
         typeName(app)
         app.buttons["join-button"].tap()
         let row = app.buttons["device-row"].firstMatch

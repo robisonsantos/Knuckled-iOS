@@ -20,8 +20,12 @@ final class ConnectionSession: ObservableObject {
     @Published private(set) var statusText = ""
     @Published private(set) var foundDevices: [DeviceInfo] = []
     @Published private(set) var errorText: String?
+    #if DEBUG
     #if targetEnvironment(simulator)
     @Published var useFake = true
+    #else
+    @Published var useFake = false
+    #endif
     #else
     @Published var useFake = false
     #endif
@@ -36,7 +40,13 @@ final class ConnectionSession: ObservableObject {
     /// transport for the whole session — discover+connect share the one
     /// instance, and cancelCurrent()/disconnect() reach it via cancel().
     private var injected: BluetoothConnector?
-    private var active: BluetoothConnector { injected ?? (useFake ? fake : ble) }
+    private var active: BluetoothConnector {
+        #if DEBUG
+        injected ?? (useFake ? fake : ble)
+        #else
+        injected ?? ble
+        #endif
+    }
     private var selectedDevice: DeviceInfo?
     private var currentLink: GameLink?
     private var retainedLinks: [GameLink] = []
@@ -46,6 +56,9 @@ final class ConnectionSession: ObservableObject {
     init(connector: BluetoothConnector? = nil) {
         // Injected transport for tests/previews; nil selects via useFake.
         self.injected = connector
+        #if !DEBUG
+        useFake = false
+        #endif
     }
 
     func startSinglePlayer() {
@@ -64,7 +77,15 @@ final class ConnectionSession: ObservableObject {
         guard !clean.isEmpty else { showError("Enter your name"); return }
         sanitizedName = clean
         isHost = true
-        let pin = FakeConnector.pin
+        // Fake transport requires the fixed PIN 1234 (FakeConnector
+        // rejects anything else; UI tests join with 1234). Real BLE
+        // hosts get a random 4-digit PIN.
+        let pin: String
+        if active is FakeConnector {
+            pin = FakeConnector.pin
+        } else {
+            pin = PinGenerator.generate()
+        }
         state = .hosting(pin: pin)
         DispatchQueue.global(qos: .userInitiated).async { [weak self] in
             guard let self else { return }

@@ -135,4 +135,44 @@ final class ConnectionSessionTests: XCTestCase {
         try waitFor(connection.isConnected, timeout: 10)
         XCTAssertEqual(mock.connectDevices, [DeviceInfo(name: "Peer", address: "AA:BB:CC:DD:EE:FF")])
     }
+
+    /// Instant non-fake transport: exercises the real (BLE) host path,
+    /// which must use a random 4-digit PIN (never the fixed Fake PIN).
+    final class InstantHostConnector: BluetoothConnector {
+        var pins: [String] = []
+        var retained: [GameLink] = []
+        func listen(pin: String) throws -> GameLink {
+            pins.append(pin)
+            let (a, b) = InMemoryLinkPair.make()
+            retained.append(b)
+            return a
+        }
+        func connect(device: DeviceInfo, pin: String) throws -> GameLink {
+            let (a, b) = InMemoryLinkPair.make()
+            retained.append(b)
+            return a
+        }
+        func discover() throws -> [DeviceInfo] { [] }
+    }
+
+    func testRealHostGeneratesRandomPins() {
+        var pins: [String] = []
+        for _ in 0..<20 {
+            let connection = ConnectionSession(connector: InstantHostConnector())
+            connection.playerName = "Host"
+            connection.onHostClicked()
+            if case .hosting(let pin) = connection.state {
+                pins.append(pin)
+            } else {
+                XCTFail("expected hosting, got \(connection.state)")
+            }
+            connection.cancelCurrent()
+        }
+        XCTAssertEqual(pins.count, 20)
+        for pin in pins {
+            XCTAssertEqual(pin.count, 4, "PIN must be 4 digits, got \(pin)")
+            XCTAssertTrue(pin.allSatisfy(\.isWholeNumber), "PIN must be numeric, got \(pin)")
+        }
+        XCTAssertGreaterThan(Set(pins).count, 1, "20 random PINs must yield at least 2 distinct values")
+    }
 }
