@@ -37,8 +37,13 @@ struct GameScreen: View {
                 // Hardcoding hostName/clientName swaps the boards for joiners.
                 let myName = session.myId == .HOST ? s.hostName : s.clientName
                 let peerName = session.myId == .HOST ? s.clientName : s.hostName
-                ScrollView {
-                    VStack(spacing: 14) {
+                // Regular width (iPad): content capped ~560pt and centered, and
+                // stretched to the viewport height so sections spread instead
+                // of piling at the top. Compact phones are unaffected (scroll).
+                GeometryReader { geo in
+                    let metrics = LayoutMetrics(contentWidth: min(geo.size.width, 560))
+                    ScrollView {
+                        VStack(spacing: 14) {
                         topBar
                         if session.peerDisconnected {
                             GlassCard {
@@ -55,15 +60,18 @@ struct GameScreen: View {
                             destroyed: s.destroyed.filter { $0.player == session.peerId },
                             active: s.currentTurn == session.peerId && s.status == .IN_PROGRESS,
                             canPlace: false,
-                            onColumnTap: nil
+                            onColumnTap: nil,
+                            metrics: metrics
                         )
                         .accessibilityIdentifier("peer-board")
+                        Spacer(minLength: 8)
                         TurnPill(state: s, myId: session.myId, peerName: peerName)
                         DiceSceneView(
                             value: s.lastRoll,
                             rolling: s.phase == .ROLLING,
                             enabled: session.canRoll,
-                            onTap: { sound.play(.tap); session.roll() }
+                            onTap: { sound.play(.tap); session.roll() },
+                            metrics: metrics
                         )
                         if s.phase == .AWAITING_PLACEMENT && s.currentTurn == session.myId {
                             Text("Tap a column to place the die")
@@ -71,6 +79,7 @@ struct GameScreen: View {
                                 .foregroundStyle(AppColors.ivory)
                                 .accessibilityIdentifier("place-hint")
                         }
+                        Spacer(minLength: 8)
                         GameBoard(
                             isMine: true,
                             name: myName,
@@ -78,12 +87,17 @@ struct GameScreen: View {
                             destroyed: s.destroyed.filter { $0.player == session.myId },
                             active: s.currentTurn == session.myId && s.status == .IN_PROGRESS,
                             canPlace: s.phase == .AWAITING_PLACEMENT && s.currentTurn == session.myId,
-                            onColumnTap: { session.place($0) }
+                            onColumnTap: { session.place($0) },
+                            metrics: metrics
                         )
                         .accessibilityIdentifier("own-board")
                     }
                     .padding(16)
+                    .frame(minHeight: geo.size.height)
+                    .frame(maxWidth: 560)
+                    .frame(maxWidth: .infinity)
                 }
+            }
                 if showResult(for: s) {
                     if s.status == .FINISHED {
                         WinnerOverlay(state: s, myId: session.myId, onPlayAgain: { session.playAgain() }, onLeave: leave)

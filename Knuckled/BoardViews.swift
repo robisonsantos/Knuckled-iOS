@@ -13,14 +13,15 @@ func peerColumnTopToBottom(_ dice: [Int]) -> [Int?] {
 
 struct DieCell: View {
     let value: Int?
+    var metrics: LayoutMetrics = .compact
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 8)
                 .fill(value == nil ? Color(red: 1, green: 1, blue: 1, opacity: 0.25) : AppColors.glassWhite)
-                .frame(width: 52, height: 52)
+                .frame(width: metrics.cell, height: metrics.cell)
             if let value {
                 Text("\(value)")
-                    .font(.title3.bold())
+                    .font(.system(size: metrics.cellFont, weight: .bold))
                     .foregroundStyle(AppColors.ivory)
             }
         }
@@ -30,11 +31,12 @@ struct DieCell: View {
 
 struct ColumnScoreChip: View {
     let value: Int
+    var metrics: LayoutMetrics = .compact
     var body: some View {
         Text("\(value)")
-            .font(.caption2)
+            .font(.system(size: metrics.chipFont))
             .foregroundStyle(AppColors.gold)
-            .frame(width: 44, height: 18)
+            .frame(width: metrics.chipWidth, height: metrics.chipHeight)
             .background(AppColors.glassWhite)
             .clipShape(RoundedRectangle(cornerRadius: 6))
     }
@@ -48,6 +50,7 @@ struct GameBoard: View {
     let active: Bool
     let canPlace: Bool
     let onColumnTap: ((Int) -> Void)?
+    var metrics: LayoutMetrics = .compact
 
     private func columnPlaceable(_ column: Int) -> Bool {
         guard column < grid.count else { return false }
@@ -69,7 +72,7 @@ struct GameBoard: View {
     /// The three columns side by side (Android: Row + SpaceEvenly).
     /// Top-aligned so a ghost row below one column never shifts its container.
     private var columnsRow: some View {
-        HStack(alignment: .top, spacing: 6) {
+        HStack(alignment: .top, spacing: metrics.gap) {
             ForEach(0..<3, id: \.self) { column in
                 columnView(column)
             }
@@ -95,16 +98,16 @@ struct GameBoard: View {
         let placeable = columnPlaceable(column)
         // Chip outside the outline (Android parity): above the box on our
         // board, below the box (under ghosts) on the peer board.
-        return VStack(spacing: 4) {
+        return VStack(spacing: metrics.gapSmall) {
             if isMine {
-                ColumnScoreChip(value: KnucklebonesRules.columnScore(dice))
+                ColumnScoreChip(value: KnucklebonesRules.columnScore(dice), metrics: metrics)
                     .accessibilityIdentifier("own-chip-\(column)")
                     .accessibilityLabel("own chip \(column)")
             }
             diceBox(cells: cells, placeable: placeable, column: column)
             destroyGhosts(column: column)
             if !isMine {
-                ColumnScoreChip(value: KnucklebonesRules.columnScore(dice))
+                ColumnScoreChip(value: KnucklebonesRules.columnScore(dice), metrics: metrics)
                     .accessibilityIdentifier("peer-chip-\(column)")
                     .accessibilityLabel("peer chip \(column)")
             }
@@ -116,9 +119,9 @@ struct GameBoard: View {
     /// columns are never interactive.
     @ViewBuilder
     private func diceBox(cells: [Int?], placeable: Bool, column: Int) -> some View {
-        let box = VStack(spacing: 4) {
+        let box = VStack(spacing: metrics.gapSmall) {
             ForEach(0..<cells.count, id: \.self) { row in
-                DieCell(value: cells[row])
+                DieCell(value: cells[row], metrics: metrics)
             }
         }
         .padding(2)
@@ -141,7 +144,7 @@ struct GameBoard: View {
 
     @ViewBuilder
     private func destroyGhosts(column: Int) -> some View {
-        DestroyGhosts(ghosts: destroyed.filter { $0.column == column })
+        DestroyGhosts(ghosts: destroyed.filter { $0.column == column }, metrics: metrics)
     }
 }
 
@@ -155,6 +158,7 @@ struct GameBoard: View {
 /// observes values, so it fires reliably here.
 struct DestroyGhosts: View {
     let ghosts: [DieRef]
+    var metrics: LayoutMetrics = .compact
     @State private var showing: [DieRef]?
     @State private var opacity = 0.0
     @State private var generation = 0
@@ -162,13 +166,13 @@ struct DestroyGhosts: View {
     var body: some View {
         Group {
             if let showing {
-                HStack(spacing: 4) {
+                HStack(spacing: metrics.gapSmall) {
                     ForEach(0..<showing.count, id: \.self) { _ in
                         ZStack {
                             RoundedRectangle(cornerRadius: 8)
                                 .fill(Color(red: 1, green: 0, blue: 0, opacity: 0.35))
-                                .frame(width: 30, height: 30)
-                            Text("×").foregroundStyle(.white)
+                                .frame(width: metrics.ghost, height: metrics.ghost)
+                            Text("×").font(.system(size: metrics.ghostFont)).foregroundStyle(.white)
                         }
                     }
                 }

@@ -8,6 +8,7 @@ struct DiceSceneView: View {
     let rolling: Bool
     let enabled: Bool
     let onTap: () -> Void
+    var metrics: LayoutMetrics = .compact
 
     var body: some View {
         // The visible die lives OUTSIDE the Button: SwiftUI dims the content
@@ -17,13 +18,13 @@ struct DiceSceneView: View {
         // identifiers, labels) while the die always renders full-opacity.
         ZStack {
             DiceSceneRepresentable(value: value, rolling: rolling)
-                .frame(width: 120, height: 120)
+                .frame(width: metrics.die, height: metrics.die)
                 .allowsHitTesting(false)
             Button(action: {
                 if enabled && !rolling { onTap() }
             }) {
                 Color.clear
-                    .frame(width: 120, height: 120)
+                    .frame(width: metrics.die, height: metrics.die)
                     .contentShape(Rectangle()) // Color.clear is not hittable without this
             }
             .buttonStyle(.plain)
@@ -31,7 +32,7 @@ struct DiceSceneView: View {
             .accessibilityIdentifier("dice")
             .accessibilityLabel(rolling ? "Dice rolling" : value.map { "Dice showing \($0)" } ?? "Dice tap to roll")
         }
-        .frame(width: 120, height: 120)
+        .frame(width: metrics.die, height: metrics.die)
     }
 }
 

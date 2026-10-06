@@ -21,6 +21,28 @@ enum AppFont {
     }
 }
 
+/// Proportional board metrics: phones render at 1.0, wider screens scale up
+/// (capped) so columns, dice and chips grow with the available width instead
+/// of staying phone-sized in the middle of an iPad screen.
+struct LayoutMetrics {
+    /// Scale derived from the capped content width (iPhone ≈ 1.0).
+    let scale: CGFloat
+    static let compact = LayoutMetrics(contentWidth: 390)
+    init(contentWidth: CGFloat) {
+        self.scale = min(max(contentWidth / 390, 1), 1.5)
+    }
+    var cell: CGFloat { 52 * scale }
+    var cellFont: CGFloat { 20 * scale } // .title3
+    var chipWidth: CGFloat { 44 * scale }
+    var chipHeight: CGFloat { 18 * scale }
+    var chipFont: CGFloat { 11 * scale } // .caption2
+    var die: CGFloat { 120 * scale }
+    var ghost: CGFloat { 30 * scale }
+    var ghostFont: CGFloat { 17 * scale } // .body
+    var gapSmall: CGFloat { 4 * scale }
+    var gap: CGFloat { 6 * scale }
+}
+
 struct FeltBackground: View {
     var body: some View {
         RadialGradient(
