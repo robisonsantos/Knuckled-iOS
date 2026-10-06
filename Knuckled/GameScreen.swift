@@ -33,6 +33,10 @@ struct GameScreen: View {
         ZStack {
             FeltBackground()
             if let s = session.state {
+                // Role-aware names (Android parity: playerName(myId/peerId)).
+                // Hardcoding hostName/clientName swaps the boards for joiners.
+                let myName = session.myId == .HOST ? s.hostName : s.clientName
+                let peerName = session.myId == .HOST ? s.clientName : s.hostName
                 ScrollView {
                     VStack(spacing: 14) {
                         topBar
@@ -46,7 +50,7 @@ struct GameScreen: View {
                         }
                         GameBoard(
                             isMine: false,
-                            name: s.clientName,
+                            name: peerName,
                             grid: s.grid[session.peerId] ?? [[], [], []],
                             destroyed: s.destroyed.filter { $0.player == session.peerId },
                             active: s.currentTurn == session.peerId && s.status == .IN_PROGRESS,
@@ -54,7 +58,7 @@ struct GameScreen: View {
                             onColumnTap: nil
                         )
                         .accessibilityIdentifier("peer-board")
-                        TurnPill(state: s, myId: session.myId, peerName: s.clientName)
+                        TurnPill(state: s, myId: session.myId, peerName: peerName)
                         DiceSceneView(
                             value: s.lastRoll,
                             rolling: s.phase == .ROLLING,
@@ -69,7 +73,7 @@ struct GameScreen: View {
                         }
                         GameBoard(
                             isMine: true,
-                            name: s.hostName,
+                            name: myName,
                             grid: s.grid[session.myId] ?? [[], [], []],
                             destroyed: s.destroyed.filter { $0.player == session.myId },
                             active: s.currentTurn == session.myId && s.status == .IN_PROGRESS,
